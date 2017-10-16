@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+<head>    
+    <meta charset="UTF-8">
+    <!-- Materilize/JQuery -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <title>Minhas Campanhas</title>
+    <script>
+        $(document).ready(function() {
+            $('.tooltipped').tooltip({delay: 50});
+        });
+    </script>
+</head>
+<body>
+    <div class="row">
+        <div class="col s8 offset-s2">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Minhas Campanhas</span>
+                    <table class="bordered highlight">
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Status</th>
+                                <th>Colaborações</th>
+                                <th>Data de Término</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Rodinha do Tobias
+                                </td>
+                                <td>
+                                    <button class="btn green">Finalizada</button>
+                                </td>
+                                <td>                                
+                                    <div class="progress">
+                                        <div class="determinate green tooltipped" 
+                                             style="width: 70%"
+                                             data-position="top" 
+                                             data-delay="50" 
+                                             data-tooltip="70%"></div>
+                                    </div>  
+                                </td>
+                                <td class="center-align">
+                                    31/10/2017
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Cabresto do Eleonor
+                                </td>
+                                <td>
+                                    <button class="btn red">Cancelada</button>
+                                </td>
+                                <td>                                
+                                    <div class="progress">
+                                        <div class="determinate red tooltipped"
+                                             style="width: 8%"
+                                             data-position="top" 
+                                             data-delay="50" 
+                                             data-tooltip="8%"></div>
+                                    </div>  
+                                </td>
+                                <td class="center-align">
+                                    08/11/2017
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Osso do Rex
+                                </td>
+                                <td>
+                                    <button class="btn blue">Andamento</button>
+                                </td>
+                                <td>                                
+                                    <div class="progress">
+                                        <div class="determinate orange tooltipped"
+                                                style="width: 34%"
+                                                data-position="top" 
+                                                data-delay="50" 
+                                                data-tooltip="34%"></div>
+                                    </div>  
+                                </td>
+                                <td class="center-align">
+                                    08/11/2017
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Coleira nova para Gertrudes
+                                </td>
+                                <td>
+                                    <button class="btn grey">Pausada</button>
+                                </td>
+                                <td>                                
+                                    <div class="progress">
+                                        <div class="determinate yellow tooltipped"
+                                                style="width: 60%"
+                                                data-position="top" 
+                                                data-delay="50" 
+                                                data-tooltip="60%"></div>
+                                    </div>  
+                                </td>
+                                <td class="center-align">
+                                    08/11/2017
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-action right-align">
+                    <a class="btn" href="#">Nova Campanha</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
