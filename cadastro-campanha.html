@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>    
+    <meta charset="UTF-8">
+    <!-- Materilize/JQuery -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("select").material_select();
+        });
+    </script>
+    <title>Cadastro de Campanhas</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col s8 offset-s2">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Cadastro de Campanha</span>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="campanha.titulo" type="text" class="validate">
+                            <label for="campanha.titulo">Título</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <select id="tipo.campanha">
+                                <option value="ARRECADACAO" selected>Arrecadação</option>
+                                <option value="PROMOCAO">Promoção</option>
+                            </select>
+                            <label for="tipo.campanha">Tipo</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="meta.arrecadacao" type="number">
+                            <label for="meta.arrecadacao">Meta R$</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="inicio.campanha" type="text">
+                            <label for="inicio.campanha">Data de Início</label>
+                        </div>
+                        <div class="input-field col s1 right-align">
+                            <input type="checkbox" class="filled-in" id="habilitar.termino" checked=""/>
+                            <label for="habilitar.termino"></label>
+                        </div>                        
+                        <div class="input-field col s5">
+                            <input id="termino.campanha" type="text">
+                            <label for="termino.campanha">Data de Termino</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="descricao.campanha" class="materialize-textarea"></textarea>
+                            <label for="descricao.campanha">Descrição</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>Imagem</span>
+                                <input type="file" multiple>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-action right-align">
+                    <a class="btn" href="#">Cancelar</a>
+                    <a class="btn" href="#">Salvar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
