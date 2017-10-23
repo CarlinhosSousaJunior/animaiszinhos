@@ -28,6 +28,7 @@ app.config(function ($routeProvider) {
 });
 
 app.controller("DoacaoController", function($scope, $http, $location) {
+
     $(document).ready(function () {
         $("select").material_select();
     });
