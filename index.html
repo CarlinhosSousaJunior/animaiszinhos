@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Materilize/JQuery -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <title>Animaiszinhos</title>
+</head>
+<body data-ng-app="Module" style="background-color: #FAFAFA">
+    <nav class="green">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Animaiszinhos</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <a href="#!/doacao">Doar</a>
+                </li>
+                <li>
+                    <a href="#!/animais">Adotar</a>
+                </li>
+                <li>
+                    <a href="#!/minhas-campanhas">Campanhas</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <ng-view></ng-view>
+
+    <!-- AngularJs -->
+    <script type="text/javascript" src="https://code.angularjs.org/1.6.6/angular.min.js"></script>
+    <script type="text/javascript" src="https://code.angularjs.org/1.6.6/angular-route.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+</body>
+<html>

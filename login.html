@@ -1,65 +1,50 @@
-<html>
+<style>
+    .painel {
+        background-color: white;
+        padding: 10px;
+        box-shadow: 1px 1px 2px #222
+    }
 
-<head>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>   
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    body {
+        background-color: #fafafa;
+    }
+</style>
+<main id="central" class="container painel" style="max-width: 600px">
+    <div style="max-height: 400px;overflow-y:hidden" class="hide-on-small-only">
+        <img style="width:100%" src="images/animais.jpeg">
+    </div>
+    <h4>LOGIN
+        <span class="hide-on-small-only">- ANIMAISZINHOS</span>
+    </h4>
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <style>
-        .painel {
-            background-color: white;
-            padding: 10px;
-            box-shadow: 1px 1px 2px #222
-        }
-        body{
-            background-color: #fafafa;
-        }
-    </style>
-</head>
-
-<body>
-    <br>
-    <main id="central" class="container painel" style="max-width: 600px">
-        <div style="max-height: 400px;overflow-y:hidden" class="hide-on-small-only">
-            <img style="width:100%" src="images/animais.jpeg">
-        </div>
-        <h4>LOGIN <span class="hide-on-small-only">- ANIMAISZINHOS</span></h4>
-
-        <form method="post" id="formulario">
-            <div class="row">
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">email</i>
-                    <input id="usuario" type="email" required>
-                    <label for="usuario">E-mail</label>
-                </div>
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">lock</i>
-                    <input id="senha" type="password" required>
-                    <label for="senha">Senha</label>
-                </div>
-                <button type="button" id="entrar" class="waves-effect waves-light btn right" style="margin-right:10px"><i class="large material-icons left">lock_open</i>Entrar</button>
+    <form method="post" id="formulario">
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">email</i>
+                <input id="usuario" type="email" required>
+                <label for="usuario">E-mail</label>
             </div>
-        </form>
-        <div class="progress">
-            <div id="barra" class="indeterminate" hidden></div>
+            <div class="input-field col s12">
+                <i class="material-icons prefix">lock</i>
+                <input id="senha" type="password" required>
+                <label for="senha">Senha</label>
+            </div>
+            <button type="button" id="entrar" class="waves-effect waves-light btn right" style="margin-right:10px">
+                <i class="large material-icons left">lock_open</i>Entrar
+            </button>
         </div>
+    </form>
+    <div class="progress">
+        <div id="barra" class="indeterminate" hidden></div>
+    </div>
 
-    </main>
+</main>
 
-    <script>
-        $("#entrar").on('click', function () {
-            
-            if ($('#usuario').val() != '' && $('#senha').val() != '') {
-                $("#barra").show();
-            }
-        });
-    </script>
-</body>
+<script>
+    $("#entrar").on('click', function () {
 
-</html>
+        if ($('#usuario').val() != '' && $('#senha').val() != '') {
+            $("#barra").show();
+        }
+    });
+</script>
