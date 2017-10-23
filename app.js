@@ -37,7 +37,7 @@ app.controller("DoacaoController", function($scope, $http, $location) {
         $http
             .post("http://localhost:49664/api/doacoes", animal)
             .then(function(response) {
-                $location.path("/adotar");
+                $location.path("/animais");
             });
     }
 });
