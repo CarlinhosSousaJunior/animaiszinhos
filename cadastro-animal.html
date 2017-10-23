@@ -8,26 +8,26 @@
                         <input id="animal.nome" data-ng-model="animal.Nome" type="text" class="validate">
                         <label for="animal.nome">Nome</label>
                     </div>
-                </div>
+                </div>                
                 <div class="row">
                     <div class="input-field col s6">
                         <select id="animal.filo" data-ng-model="animal.Filo">
-                            <option data-ng-value="MAMIFERO">Mamífero</option>
-                            <option data-ng-value="AVE">Ave</option>
-                            <option data-ng-value="PEIXE">Peixe</option>
-                            <option data-ng-value="REPTIL">Reptil</option>
-                            <option data-ng-value="ANFIBIO">Anfíbio</option>
+                            <option value="MAMIFERO">Mamífero</option>
+                            <option value="AVE">Ave</option>
+                            <option value="PEIXE">Peixe</option>
+                            <option value="REPTIL">Reptil</option>
+                            <option value="ANFIBIO">Anfíbio</option>
                         </select>
                         <label for="animal.filo">Filo</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="animal.dataNascimento" type="text">
+                        <input id="animal.dataNascimento" data-ng-model="animal.DataNascimento" type="text">
                         <label for="animal.dataNascimento">Data de Nascimento</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <textarea id="animal.descricao" class="materialize-textarea"></textarea>
+                        <textarea id="animal.descricao" data-ng-model="animal.Descricao" class="materialize-textarea"></textarea>
                         <label for="animal.descricao">Descrição</label>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
             </div>
             <div class="card-action right-align">
                 <a class="btn red" href="#">Cancelar</a>
-                <a class="btn green" href="#">Salvar</a>
+                <a class="btn green" data-ng-click="salvarAnimal(animal)">Salvar</a>
             </div>
         </div>
     </div>

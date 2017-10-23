@@ -16,7 +16,8 @@ app.config(function ($routeProvider) {
         templateUrl: "cadastro-campanha.html"
     })
     .when("/animais", {
-        templateUrl: "listagem-animais.html"
+        templateUrl: "listagem-animais.html",
+        controller: "AnimaisController"
     })
     .when("/adocao", {
         templateUrl: "detalhes-animal.html"
@@ -26,8 +27,25 @@ app.config(function ($routeProvider) {
     });
 });
 
-app.controller("DoacaoController", function($scope, $http) {
+app.controller("DoacaoController", function($scope, $http, $location) {
     $(document).ready(function () {
         $("select").material_select();
     });
+
+    $scope.salvarAnimal = function(animal) {
+        console.log(JSON.stringify(animal));
+        $http
+            .post("http://localhost:49664/api/doacoes", animal)
+            .then(function(response) {
+                $location.path("/adotar");
+            });
+    }
+});
+
+app.controller("AnimaisController", function($scope, $http) {
+    $http
+        .get("http://localhost:49664/api/doacoes", {})
+        .then(function(response) {
+            $scope.doacoes = response.data;
+        });
 });
