@@ -4,19 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <!-- Materilize/JQuery -->
+    <script type="text/javascript" src="vendors/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+    <script type="text/javascript" src="vendors/underscore.min.js"></script>
+    <!-- AngularJs -->
+    <script type="text/javascript" src="vendors/angular.min.js"></script>
+    <script type="text/javascript" src="vendors/angular-storage.min.js"></script>
+    <script type="text/javascript" src="vendors/restangular.min.js"></script>
+    <script type="text/javascript" src="vendors/angular-route.min.js"></script>    
     <title>Animaiszinhos</title>
 </head>
 
-<body data-ng-app="Module" style="background-color: #FAFAFA">
+<body data-ng-app="Module" data-ng-controller="MainController as mainVm" style="background-color: #FAFAFA">
     <nav class="green">
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">Animaiszinhos</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <ul id="nav-mobile" class="right hide-on-med-and-down" data-ng-show="mainVm.$sessionStorage.access_token">
                 <li>
                     <a href="#!/doacao">Doar</a>
                 </li>
@@ -26,11 +34,16 @@
                 <li>
                     <a href="#!/minhas-campanhas">Campanhas</a>
                 </li>
+                <li>
+                    <a href="" data-ng-click="mainVm.logout()">
+                        <li class="material-icons">power_settings_new</li>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
-    <ng-view></ng-view>
 
+    <ng-view></ng-view>
 
     <footer class="page-footer green" style="margin-top: 5rem">
         <div class="container">
@@ -57,10 +70,25 @@
         </div>
     </footer>
 
+    <!-- Core -->
+    <script type="text/javascript" src="core/app.js"></script>
+    
+    <script type="text/javascript" src="core/services/toast.service.js"></script>
+    <script type="text/javascript" src="core/services/request.service.js"></script>
+    <script type="text/javascript" src="core/services/logged.rest.service.js"></script>
+    <script type="text/javascript" src="core/services/rest.service.js"></script>
 
-    <!-- AngularJs -->
-    <script type="text/javascript" src="https://code.angularjs.org/1.6.6/angular.min.js"></script>
-    <script type="text/javascript" src="https://code.angularjs.org/1.6.6/angular-route.min.js"></script>
-    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="core/directives/ngEnter.js"></script>
+    <script type="text/javascript" src="core/directives/ngMask.js"></script>
+
+    <script type="text/javascript" src="core/main.controller.js"></script>
+
+    <!-- Usuário -->
+    <script type="text/javascript" src="usuario/usuario.resource.js"></script>
+    <script type="text/javascript" src="usuario/login.controller.js"></script>
+
+    <!-- Animal -->
+    <script type="text/javascript" src="animal/doacao.controller.js"></script>
+    <script type="text/javascript" src="animal/lista.controller.js"></script>
 </body>
 <html>

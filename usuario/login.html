@@ -4,10 +4,6 @@
         padding: 10px;
         box-shadow: 1px 1px 2px #222
     }
-
-    body {
-        background-color: #fafafa;
-    }
 </style>
 <div class="row">
     <div class="col offset-s1 s10">
@@ -23,29 +19,23 @@
                     <div class="col s6">                        
                         <div class="input-field col s12">
                             <i class="material-icons prefix">email</i>
-                            <input id="usuario" type="email" required>
+                            <input id="usuario" type="email" data-ng-model="usuarioVm.username" required>
                             <label for="usuario">E-mail</label>
                         </div>
                         <div class="input-field col s12">
                             <i class="material-icons prefix">lock</i>
-                            <input id="senha" type="password" required>
+                            <input id="senha" type="password" data-ng-model="usuarioVm.password" data-ng-enter="usuarioVm.autenticar(usuarioVm.username, usuarioVm.password)" required>
                             <label for="senha">Senha</label>
                         </div>
-                        <a href="#!/animais" id="entrar" class="waves-effect waves-light btn right" style="margin-right:10px">
-                            <i class="large material-icons left">lock_open</i>Entrar
-                        </a>
+                        <div class="col s12">
+                            <a data-ng-click="usuarioVm.autenticar(usuarioVm.username, usuarioVm.password)" id="entrar" class="waves-effect waves-light btn right" style="margin-right:10px">
+                                <i class="large material-icons left">lock_open</i>Entrar
+                            </a>
+                            <button class="btn-flat waves-effect waves-light right">Registrar-se</button>
+                        </div>                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    $("#entrar").on('click', function () {
-
-        if ($('#usuario').val() != '' && $('#senha').val() != '') {
-            $("#barra").show();
-        }
-    });
-</script>
