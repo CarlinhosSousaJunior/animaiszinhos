@@ -1,35 +1,60 @@
 <div class="row">
     <div class="col s12">
-        <div class="card-panel white">
-            <div class="row">
-                <div class="col s12">
-                    <nav class="green accent-4">
-                        <div class="nav-wrapper">
-                            <div class="col s12">
-                                <a href="#!" class="breadcrumb">Animais para adoção</a>
-                                <a href="#!" class="breadcrumb">Lhamas</a>
-                                <a href="#!" class="breadcrumb">Eleonor</a>
-                            </div>
-                        </div>
-                    </nav>
+        <div class="card">
+            <nav class="green accent-4" style="padding: 0 0 0 1rem">
+                <div class="nav-wrapper">
+                    <div class="col s12">
+                        <a class="breadcrumb">Animais para adoção</a>
+                        <a class="breadcrumb">{{adocaoVm.doacao.Animal.Especie}}</a>
+                        <a class="breadcrumb">{{adocaoVm.doacao.Animal.Nome}}</a>
+                        <a href="#!/animais">
+                            <i class="material-icons white-text right" style="cursor: pointer">arrow_back</i>
+                        </a>                        
+                    </div>
                 </div>
-            </div>
-            <div class="row">
+            </nav>
+            <div class="row" style="padding-top: 1rem">
                 <div class="col s2">
                     <img src="images/eleonor.jpg" class="circle" width="200px" height="200px">
                 </div>
                 <div class="col s4">
-                    <h4>Eleonor</h4>
-                    <p>Lhama linda e educada precisa de um lar.</p>
+                    <div onmouseover="$('#btn-editar').show()" onmouseout="$('#btn-editar').hide()">
+                        <a href="#!/doacao/{{adocaoVm.doacao.Id}}" id="btn-editar" class="btn-floating waves-effect waves-light blue" style="display:none">
+                            <i class="material-icons">edit</i>
+                        </a>
+                        <h4 style="display: inline-block">{{adocaoVm.doacao.Animal.Nome}}</h4>                        
+                    </div>                    
+                    <p>{{adocaoVm.doacao.Animal.Descricao}}</p>
                     <ul>
                         <li>
-                            <b>Idade:</b> 7 anos</li>
+                            <b>Idade:</b> 7 anos
+                        </li>
                         <li>
-                            <b>Peso:</b> 200 Kg</li>
+                            <b>Peso:</b> {{adocaoVm.doacao.Animal.Peso}} Kg
+                        </li>
                         <li>
-                            <b>Raça:</b> Lhama</li>
+                            <b>Filo:</b> {{adocaoVm.doacao.Animal.Filo}}
+                        </li>
+                        <li>
+                            <b>Espécie:</b> {{adocaoVm.doacao.Animal.Especie}}
+                        </li>                        
                     </ul>
-                    <a class="btn waves-effect waves-light green accent-4 pulse modal-trigger" onclick="$('#modal1').modal('open');">Quero adotar !</a>
+                    <a  data-ng-hide="adocaoVm.Usuario.Id === adocaoVm.doacao.Usuario.Id"
+                        class="btn waves-effect waves-light green accent-4 pulse modal-trigger" 
+                        onclick="$('#modal1').modal('open');">
+                        Quero adotar !
+                    </a>
+                    <a  data-ng-show="adocaoVm.Usuario.Id === adocaoVm.doacao.Usuario.Id"
+                        class="btn waves-effect waves-light orange accent-4 modal-trigger"
+                        data-ng-click="adocaoVm.abrirModalSolicitacoes(adocaoVm.doacao.Id)">
+                        <span class="left">
+                            <i class="material-icons">playlist_add_check</i>
+                        </span>                        
+                        <span class="right">
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            Selecionar Candidato
+                        </span>                        
+                    </a>
                 </div>
                 <div class="col s6">
                     <h5>Mais fotos ...</h5>
@@ -47,103 +72,40 @@
                 </div>
             </div>
             <br>
-            <h5>Comentários (5)</h5>
+            <h5>Comentários ({{adocaoVm.comentarios.length || '0'}})</h5>
             <ul class="collection">
-                <li class="collection-item avatar">
-                    <i class="material-icons circle">perm_identity</i>
-                    <span class="title">
-                        <b>Josué</b>
-                        <div class="chip right">
-                            <a href="#">
-                                <i class="material-icons  small red-text left">thumb_down</i>
-                            </a>
-                            <b>2</b>
-                        </div>
-                        <div class="chip right">
-                            <a href="#">
-                                <i class="material-icons small green-text left">thumb_up</i>
-                            </a>
-                            <b>13</b>
-                        </div>
-                    </span>
-                    <p>Muito linda essa lhama!</p>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="material-icons circle">perm_identity</i>
-                    <span class="title">
-                        <b>Mariscleide</b>
-                        <div class="chip right">
-                            <a href="#">
-                                <i class="material-icons  small red-text left">thumb_down</i>
-                            </a>
-                            <b>1</b>
-                        </div>
-                        <div class="chip right">
-                            <a href="#">
-                                <i class="material-icons small green-text left">thumb_up</i>
-                            </a>
-                            <b>10</b>
-                        </div>
-                    </span>
-                    <p>Que coisa mais fofa</p>
-                </li>
-                <li class="collection-item avatar">
-                    <img src="images/Inhegas.jpg" alt="" class="circle">
-                    <span class="title">
-                        <b>Inhegas</b>
-                        <div class="chip right">
-                            <a href="#">
-                                <i class="material-icons  small red-text left">thumb_down</i>
-                            </a>
-                            <b>0</b>
-                        </div>
-                        <div class="chip right">
-                            <a href="#">
-                                <i class="material-icons small green-text left">thumb_up</i>
-                            </a>
-                            <b>500</b>
-                        </div>
-                    </span>
-                    <p>Pesadãããããooo !!!</p>
-                </li>
-                <li class="collection-item avatar">
-                    <img src="images/travolta.gif" alt="" class="circle">
-                    <span class="title">
-                        <b>Jhon Travolta</b>
-                        <div class="chip right">
-                            <a href="#">
-                                <i class="material-icons  small red-text left">thumb_down</i>
-                            </a>
-                            <b>232</b>
-                        </div>
-                        <div class="chip right">
-                            <a href="#">
-                                <i class="material-icons small green-text left">thumb_up</i>
-                            </a>
-                            <b>111</b>
-                        </div>
-                    </span>
-                    <p>De onde saiu isso ?</p>
-                </li>
-                <li class="collection-item avatar">
-                    <img src="images/irineu.png" alt="" class="circle">
-                    <span class="title">
-                        <b>Irineu</b>
-                        <div class="chip right">
-                            <a href="#">
-                                <i class="material-icons  small red-text left">thumb_down</i>
-                            </a>
-                            <b>50</b>
-                        </div>
-                        <div class="chip right">
-                            <a href="#">
-                                <i class="material-icons small green-text left">thumb_up</i>
-                            </a>
-                            <b>302</b>
-                        </div>
-                    </span>
-                    <p>Você não sabe nem eu !</p>
-                </li>
+                <li class="collection-item avatar" data-ng-repeat="comentario in adocaoVm.comentarios">
+                        <i class="material-icons circle">perm_identity</i>
+                        <span class="title">
+                            <b data-ng-bind="comentario.Remetente.Nome"></b>
+                            <div class="chip right">
+                                <a href="#">
+                                    <i class="material-icons  small red-text left">thumb_down</i>
+                                </a>
+                                <b>0</b>
+                            </div>
+                            <div class="chip right">
+                                <a href="#">
+                                    <i class="material-icons small green-text left">thumb_up</i>
+                                </a>
+                                <b>0</b>
+                            </div>
+                        </span>
+                        <p data-ng-bind="comentario.Mensagem"></p>
+                    </li>
+                <div class="row">
+                    <div class="input-field col s10">
+                        <i class="material-icons prefix">message</i>
+                        <label for="adocao.comentario">Deixe aqui seu comentário</label>
+                        <input id="adocao.comentario" type="text" data-ng-model="adocaoVm.mensagem">
+                    </div>
+                    <div class="col s2 right-align">                        
+                        <button data-ng-click="adocaoVm.enviarComentario(adocaoVm.mensagem)" class="btn waves-effect waves-light blue" style="margin-top: 1.5rem">
+                            Enviar
+                            <i class="material-icons right">send</i>                            
+                        </button>
+                    </div>                    
+                </div>
             </ul>
         </div>
     </div>
@@ -152,7 +114,7 @@
 <!-- Modal Structure -->
 <div id="modal1" class="modal">
     <div class="modal-content">
-        <h4>Adotar Eleonor !</h4>
+        <h4>Adotar {{adocaoVm.doacao.Animal.Nome}} !</h4>
         <p>Você está a um passo de adotar o seu pet !</p>
         <p>Para prosseguir, informe porque você deveria ser escolhido como o dono deste animal. Depois é só cruzar os dedos
             e esperar o dono temporário entrar em contato com você.</p>
@@ -161,7 +123,7 @@
             <form class="col s12">
                 <div class="row">
                     <div class="input-field col s12">
-                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                        <textarea id="textarea1" class="materialize-textarea" data-ng-model="adocaoVm.motivo"></textarea>
                         <label for="textarea1">Descreva sobre você e como pretende cuidar do pet...</label>
                     </div>
                 </div>
@@ -169,8 +131,30 @@
         </div>
     </div>
     <div class="modal-footer">
-        <a class="btn modal-action modal-close waves-effect waves-green">ENVIAR SOLICITAÇÃO</a>
-        <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">CANCELAR</a>
+        <a class="btn modal-action modal-close waves-effect waves-green" data-ng-click="adocaoVm.enviarSolicitacao(adocaoVm.motivo)">ENVIAR SOLICITAÇÃO</a>
+        <a class="modal-action modal-close waves-effect waves-red btn-flat">CANCELAR</a>
+    </div>
+</div>
+
+<div id="modal-solicitacoes" class="modal">
+    <div class="modal-content green white-text">
+        <h4>Candidatos para adotar {{adocaoVm.doacao.Animal.Nome}} !</h4>
+    </div>
+    <table class="table hilight striped">
+        <tbody>
+            <tr data-ng-repeat="solicitacao in adocaoVm.solicitacoes">
+                <td>{{solicitacao.Usuario.Nome.split(' ')[0]}}</td>
+                <td>{{solicitacao.Motivo}}</td>
+                <td class="center-align">
+                    <button class="btn-floating waves-effect waves-light green" data-ng-click="adocaoVm.selecionarCandidato(solicitacao)">
+                        <i class="material-icons">check_circle</i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="modal-footer">        
+        <a class="modal-action modal-close waves-effect waves-red btn-flat">Fechar</a>
     </div>
 </div>
 

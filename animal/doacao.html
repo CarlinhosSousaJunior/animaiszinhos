@@ -2,27 +2,38 @@
     <div class="col s8 offset-s2">
         <div class="card">
             <div class="card-content">
-                <span class="card-title">Cadastro de Doação</span>
+                <span class="card-title" data-ng-hide="animal.Id">Cadastro de Doação</span>
+                <span class="card-title" data-ng-show="animal.Id">Editar {{animal.Nome}}</span>
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="animal.nome" data-ng-model="animal.Nome" type="text" class="validate">
                         <label for="animal.nome">Nome</label>
                     </div>
-                </div>                
+                </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <select id="animal.filo" data-ng-model="animal.Filo">
-                            <option value="MAMIFERO">Mamífero</option>
-                            <option value="AVE">Ave</option>
-                            <option value="PEIXE">Peixe</option>
-                            <option value="REPTIL">Reptil</option>
-                            <option value="ANFIBIO">Anfíbio</option>
+                        <select id="animal-filo" data-ng-model="animal.Filo">
+                            <option value="MAMIFERO" ng-selected="animal.Filo == 1">Mamífero</option>
+                            <option value="AVE" ng-selected="animal.Filo == 2">Ave</option>
+                            <option value="PEIXE" ng-selected="animal.Filo == 3">Peixe</option>
+                            <option value="REPTIL" ng-selected="animal.Filo == 4">Reptil</option>
+                            <option value="ANFIBIO" ng-selected="animal.Filo == 5">Anfíbio</option>
                         </select>
-                        <label for="animal.filo">Filo</label>
+                        <label for="animal-filo">Filo</label>
                     </div>
+                    <div class="input-field col s6">
+                        <input id="animal.especie" data-ng-model="animal.Especie" type="text" class="validate">
+                        <label for="animal.especie">Espécie</label>
+                    </div>
+                </div>
+                <div class="row">                    
                     <div class="input-field col s6">
                         <input id="animal.dataNascimento" data-ng-model="animal.DataNascimento" type="text">
                         <label for="animal.dataNascimento">Data de Nascimento</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="animal.peso" data-ng-model="animal.Peso" type="number">
+                        <label for="animal.peso">Peso (kg)</label>
                     </div>
                 </div>
                 <div class="row">
@@ -35,7 +46,7 @@
                     <div class="file-field input-field">
                         <div class="btn blue">
                             <span>Imagem</span>
-                            <input type="file" multiple>
+                            <input id="doacao.imagens" type="file" data-ng-model="imagens" data-ng-change="carregarThumbs(imagens)" ng-file multiple>
                         </div>
                         <div class="file-path-wrapper">
                             <input class="file-path validate" type="text">
@@ -45,7 +56,7 @@
             </div>
             <div class="card-action right-align">
                 <a class="btn red" href="#!/animais">Cancelar</a>
-                <a class="btn green" data-ng-click="salvarAnimal(animal)">Salvar</a>
+                <a class="btn green" data-ng-click="salvar(animal, imagens)">Salvar</a>
             </div>
         </div>
     </div>

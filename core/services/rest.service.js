@@ -37,21 +37,21 @@
 
         function buscar(rota, parametros) {
             parametros = parametros || {};
-            return this.obterRestangular().all(rota).getList(parametros);
+            return obterRestangular().all(rota).getList(parametros);
         }
 
         function buscarUm(rota, id) {
-            return this.obterRestangular().one(rota, id).get();
+            return obterRestangular().one(rota, id).get();
         }
 
         function salvar(rota, entidade) {
-            if (!entidade.Id)
+            if (!entidade.Id || !entidade.id)
                 return _adicionar(rota, entidade);
             return _editar(entidade);
         }
 
         function _adicionar(rota, entidade) {
-            return this.obterRestangular().all(rota).post(entidade);
+            return obterRestangular().all(rota).post(entidade);
         }
 
         function _editar(entidade) {
@@ -60,7 +60,7 @@
         }
 
         function remover(rota, id) {
-            return this.obterRestangular().one(rota, id).remove();
+            return obterRestangular().one(rota, id).remove();
         }
     }
 })();

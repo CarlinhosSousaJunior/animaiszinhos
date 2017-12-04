@@ -5,18 +5,19 @@
         box-shadow: 1px 1px 2px #222
     }
 </style>
-<div class="row">
+<div class="row" data-ng-init="usuarioVm.autenticando = true">
     <div class="col offset-s1 s10">
-        <div class="card">
+        <!-- Autenticacao -->
+        <div class="card" data-ng-show="usuarioVm.autenticando">
             <h3 style="padding: 0.5rem 1rem">Entre agora e adote um companheiro!</h3>
-            <div class="card-content">                
-                <div class="row">                    
+            <div class="card-content">
+                <div class="row">
                     <div class="col s6">
                         <div style="position:absolute;max-height: 400px;overflow-y:hidden" class="hide-on-small-only">
                             <img style="width:100%" src="images/animais.png">
                         </div>
                     </div>
-                    <div class="col s6">                        
+                    <div class="col s6">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">email</i>
                             <input id="usuario" type="email" data-ng-model="usuarioVm.username" required>
@@ -31,10 +32,37 @@
                             <a data-ng-click="usuarioVm.autenticar(usuarioVm.username, usuarioVm.password)" id="entrar" class="waves-effect waves-light btn right" style="margin-right:10px">
                                 <i class="large material-icons left">lock_open</i>Entrar
                             </a>
-                            <button class="btn-flat waves-effect waves-light right">Registrar-se</button>
-                        </div>                        
+                            <button class="btn-flat waves-effect waves-light right" data-ng-click="usuarioVm.autenticando = false">Registre-se</button>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <!-- Cadastro -->
+        <div class="card" data-ng-hide="usuarioVm.autenticando">
+            <div class="card-content">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label for="usuario.cadastro.nome">Nome</label>
+                        <input id="usuario.cadastro.nome" type="text" data-ng-model="usuarioVm.cadastro.Nome">
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="usuario.cadastro.email">Email</label>
+                        <input id="usuario.cadastro.email" type="text" data-ng-model="usuarioVm.cadastro.Email">
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <label for="usuario.cadastro.dataNascimento">Data de Nascimento</label>
+                        <input id="usuario.cadastro.dataNascimeto" type="text"data-ng-model="usuarioVm.cadastro.DataNascimento">
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <label for="usuario.cadastro.senha">Senha</label>
+                        <input id="usuario.cadastro.senha" type="password" data-ng-model="usuarioVm.cadastro.Senha">
+                    </div>
+                </div>
+            </div>
+            <div class="card-action right-align">
+                <button class="btn waves-effect waves-light red" data-ng-click="usuarioVm.autenticando = true">Cancelar</button>
+                <button class="btn waves-effect waves-light green" data-ng-click="usuarioVm.cadastrar(usuarioVm.cadastro)">Confirmar</button>
             </div>
         </div>
     </div>

@@ -10,21 +10,24 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-
+    
     <script type="text/javascript" src="vendors/underscore.min.js"></script>
     <!-- AngularJs -->
     <script type="text/javascript" src="vendors/angular.min.js"></script>
     <script type="text/javascript" src="vendors/angular-storage.min.js"></script>
     <script type="text/javascript" src="vendors/restangular.min.js"></script>
-    <script type="text/javascript" src="vendors/angular-route.min.js"></script>    
+    <script type="text/javascript" src="vendors/angular-route.min.js"></script>
     <title>Animaiszinhos</title>
 </head>
 
-<body data-ng-app="Module" data-ng-controller="MainController as mainVm" style="background-color: #FAFAFA">
+<body data-ng-app="Module" data-ng-controller="MainController as mainVm" style="background-color: #FAFAFA; min-height: 100%; max-width: 100%">
     <nav class="green">
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">Animaiszinhos</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down" data-ng-show="mainVm.$sessionStorage.access_token">
+                <li>
+                    Bem Vindo, {{mainVm.$sessionStorage.Usuario.Nome}} !
+                </li>
                 <li>
                     <a href="#!/doacao">Doar</a>
                 </li>
@@ -80,6 +83,7 @@
 
     <script type="text/javascript" src="core/directives/ngEnter.js"></script>
     <script type="text/javascript" src="core/directives/ngMask.js"></script>
+    <script type="text/javascript" src="core/directives/ngFile.js"></script>
 
     <script type="text/javascript" src="core/main.controller.js"></script>
 
@@ -89,6 +93,7 @@
 
     <!-- Animal -->
     <script type="text/javascript" src="animal/doacao.controller.js"></script>
+    <script type="text/javascript" src="animal/adocao.controller.js"></script>
     <script type="text/javascript" src="animal/lista.controller.js"></script>
 </body>
 <html>
