@@ -46,7 +46,7 @@
                     <div class="file-field input-field">
                         <div class="btn blue">
                             <span>Imagem</span>
-                            <input id="doacao.imagens" type="file" data-ng-model="imagens" data-ng-change="carregarThumbs(imagens)" ng-file multiple>
+                            <input id="doacao.imagens" type="file" ng-files="carregarThumbs($files)" multiple>
                         </div>
                         <div class="file-path-wrapper">
                             <input class="file-path validate" type="text">
@@ -56,7 +56,7 @@
             </div>
             <div class="card-action right-align">
                 <a class="btn red" href="#!/animais">Cancelar</a>
-                <a class="btn green" data-ng-click="salvar(animal, imagens)">Salvar</a>
+                <a class="btn green" data-ng-click="salvar(animal)">Salvar</a>
             </div>
         </div>
     </div>

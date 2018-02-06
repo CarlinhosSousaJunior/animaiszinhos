@@ -4,7 +4,7 @@ angular
 
 function AnimaisController($scope, $http, $location, $sessionStorage) {
     $scope.Usuario = $sessionStorage.Usuario;
-
+    $scope.SERVER_BASE_URL = SERVER_BASE_URL;
     $http
         .get("http://localhost:49664/api/doacoes", {})
         .then(response => $scope.doacoes = response.data);

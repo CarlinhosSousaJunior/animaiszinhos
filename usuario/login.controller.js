@@ -7,7 +7,14 @@ function UsuarioController(UsuarioResource, $location, $sessionStorage) {
 
     usuarioVm.cadastrar = cadastrar;
     usuarioVm.autenticar = autenticar;
-    
+    usuarioVm.moveToStep = moveToStep;
+
+    $(document).ready(() => {
+        $(".step-content:not(:first)").hide();
+        $("select").material_select();
+        $(".input-field > select").find("label").addClass("active");
+    });
+
     if($sessionStorage.access_token)
         $location.path("/animais");
 
@@ -36,5 +43,15 @@ function UsuarioController(UsuarioResource, $location, $sessionStorage) {
             Materialize.toast("Usuário salvo com sucesso", 3500);
             autenticar(response.Email, response.Senha);
         });
+    }
+
+    function moveToStep(step) {
+        $(".step.active").removeClass("active");
+        $(".step-content").hide();        
+
+        let stepTarget = $(".step")[step-1];
+        $(stepTarget).addClass("active");
+        let stepContentTarget = $(".step-content")[step-1];
+        $(stepContentTarget).fadeIn();
     }
 };

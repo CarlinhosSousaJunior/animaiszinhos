@@ -32,7 +32,8 @@
             <div class="col m3 s12" data-ng-repeat="doacao in doacoes | filter: filtro" data-ng-show="!doadosPorMim || (doadosPorMim && doacao.Usuario.Id == Usuario.Id)">
                 <div class="card medium sticky-action">
                     <div class="card-image waves-effect waves-light">
-                        <img src="images/default.jpg">
+                        <img data-ng-hide="doacao.Animal.Fotos.length" src="images/default.jpg">
+                        <img data-ng-show="doacao.Animal.Fotos.length" src="{{SERVER_BASE_URL + 'fotos/' + doacao.Animal.Fotos[0]}}" alt="">
                     </div>
                     <div class="card-content">
                         <span class="card-title activator grey-text text-darken-4">

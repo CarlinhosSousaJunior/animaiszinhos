@@ -15,7 +15,8 @@
             </nav>
             <div class="row" style="padding-top: 1rem">
                 <div class="col s2">
-                    <img src="images/eleonor.jpg" class="circle" width="200px" height="200px">
+                    <img data-ng-hide="adocaoVm.doacao.Animal.Fotos.length" class="circle" width="200px" height="200px" src="images/default.jpg">
+                    <img data-ng-show="adocaoVm.doacao.Animal.Fotos.length" class="circle" width="200px" height="200px" src="{{adocaoVm.doacao.Animal.Fotos[0]}}">
                 </div>
                 <div class="col s4">
                     <div onmouseover="$('#btn-editar').show()" onmouseout="$('#btn-editar').hide()">
@@ -58,15 +59,11 @@
                 </div>
                 <div class="col s6">
                     <h5>Mais fotos ...</h5>
-                    <div style='height:300px;' class="carousel">
-                        <a class="carousel-item" href="#one!">
-                            <img src="images/eleonor2.jpeg">
-                        </a>
-                        <a class="carousel-item" href="#two!">
-                            <img src="images/eleonor-descolado.jpg">
-                        </a>
-                        <a class="carousel-item" href="#three!">
-                            <img src="images/eleonor-descolado-2.jpg">
+                    <div class="carousel">
+                        <a class="carousel-item" 
+                           href="#animal-foto-{{$index}}"
+                           data-ng-repeat="foto in adocaoVm.doacao.Animal.Fotos">
+                            <img style="height: 250px; width: 250px" src="{{foto}}">
                         </a>
                     </div>
                 </div>
@@ -157,10 +154,3 @@
         <a class="modal-action modal-close waves-effect waves-red btn-flat">Fechar</a>
     </div>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $('.carousel').carousel();
-        $('.modal').modal();
-    });
-</script>

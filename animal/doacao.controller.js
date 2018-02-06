@@ -11,31 +11,44 @@ function DoacaoController($scope, RestService, $sessionStorage, $http, $location
             $("select").material_select();
     });
 
-    $scope.salvar = function(animal, imagens) {
-        // salvarImagens(imagens).then(response => {
-        //     animal.Fotos = response.data;
-            salvarDoacao({
-                Animal: animal,
-                Usuario: $sessionStorage.Usuario
-            });
-        // });
-    }
-
-    function salvarImagens(imagens) {
-        let formdata = new FormData();
-        imagens.forEach(imagem => formdata.append("file", imagem));
-        return $http({
-            method: "post",
-            url: SERVER_BASE_URL.concat("fotos"),
-            data: formdata,
-            headers: { 'Content-Type': undefined, 'Authorization':  $sessionStorage.access_token}
+    $scope.salvar = function(animal) {
+        salvarDoacao({ 
+            Animal: animal, 
+            Usuario: $sessionStorage.Usuario 
         });
     }
 
-    function salvarDoacao(animal) {
+    $scope.carregarThumbs = function(imagens) {
+        $scope.formdata = new FormData();        
+        for(imagem of imagens)
+            $scope.formdata.append("file", imagem);
+    }
+
+    function salvarDoacao(doacao) {
         RestService
-            .salvar("doacoes", animal)
-            .then(response => $location.path("/animais"));
+            .salvar("doacoes", doacao)
+            .then(response => {
+                console.log(response, $scope.formdata);
+                if($scope.formdata) {
+                    $scope.formdata.append("Entidade", response.Animal.Id);
+                    salvarImagens($scope.formdata).then(() => {
+                        Materialize.toast("Doação realizada com sucesso.", 3500);
+                        $location.path("/animais");
+                    });
+                } else {
+                    Materialize.toast("Doação realizada com sucesso.", 3500);
+                    $location.path("/animais");
+                }                
+            });
+    }
+
+    function salvarImagens(formdata) {
+        return $http({
+            method: 'post',
+            url: SERVER_BASE_URL.concat("fotos"),
+            data: formdata,
+            headers: { 'Content-Type': undefined, 'Authorization': $sessionStorage.access_token }
+        });
     }
 
     function obterDoacao(doacao) {

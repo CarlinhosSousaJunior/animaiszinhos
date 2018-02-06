@@ -2,9 +2,9 @@ angular
     .module("Module")
     .controller("AdocaoController", AdocaoController);
 
-function AdocaoController(RestService, $routeParams, $sessionStorage) {
+function AdocaoController(RestService, $routeParams, $sessionStorage, $scope) {
     let adocaoVm = this;
-
+    
     adocaoVm.enviarSolicitacao = enviarSolicitacao;
     adocaoVm.enviarComentario = enviarComentario;
     adocaoVm.obterComentarios = obterComentarios;    
@@ -15,11 +15,15 @@ function AdocaoController(RestService, $routeParams, $sessionStorage) {
     obterDoacao($routeParams.id);
     obterComentarios($routeParams.id);
 
+    $(document).ready($('.modal').modal());
+
     function obterDoacao(id) {
         RestService
             .buscarUm("doacoes", id)
             .then(response => {
                 adocaoVm.doacao = response;
+                adocaoVm.doacao.Animal.Fotos = response.Animal.Fotos.map(f => SERVER_BASE_URL.concat("fotos/", f));
+                setTimeout(() => $('.carousel').carousel());
             });
     }
 

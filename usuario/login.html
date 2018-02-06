@@ -5,19 +5,19 @@
         box-shadow: 1px 1px 2px #222
     }
 </style>
-<div class="row" data-ng-init="usuarioVm.autenticando = true">
+<div class="row" data-ng-init="usuarioVm.autenticando = false">
     <div class="col offset-s1 s10">
         <!-- Autenticacao -->
         <div class="card" data-ng-show="usuarioVm.autenticando">
             <h3 style="padding: 0.5rem 1rem">Entre agora e adote um companheiro!</h3>
             <div class="card-content">
                 <div class="row">
-                    <div class="col s6">
+                    <div class="col m6 hide-on-small-only">
                         <div style="position:absolute;max-height: 400px;overflow-y:hidden" class="hide-on-small-only">
                             <img style="width:100%" src="images/animais.png">
                         </div>
                     </div>
-                    <div class="col s6">
+                    <div class="col s12 m6">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">email</i>
                             <input id="usuario" type="email" data-ng-model="usuarioVm.username" required>
@@ -25,11 +25,13 @@
                         </div>
                         <div class="input-field col s12">
                             <i class="material-icons prefix">lock</i>
-                            <input id="senha" type="password" data-ng-model="usuarioVm.password" data-ng-enter="usuarioVm.autenticar(usuarioVm.username, usuarioVm.password)" required>
+                            <input id="senha" type="password" data-ng-model="usuarioVm.password" data-ng-enter="usuarioVm.autenticar(usuarioVm.username, usuarioVm.password)"
+                                required>
                             <label for="senha">Senha</label>
                         </div>
                         <div class="col s12">
-                            <a data-ng-click="usuarioVm.autenticar(usuarioVm.username, usuarioVm.password)" id="entrar" class="waves-effect waves-light btn right" style="margin-right:10px">
+                            <a data-ng-click="usuarioVm.autenticar(usuarioVm.username, usuarioVm.password)" id="entrar" class="waves-effect waves-light btn right"
+                                style="margin-right:10px">
                                 <i class="large material-icons left">lock_open</i>Entrar
                             </a>
                             <button class="btn-flat waves-effect waves-light right" data-ng-click="usuarioVm.autenticando = false">Registre-se</button>
@@ -39,25 +41,98 @@
             </div>
         </div>
         <!-- Cadastro -->
-        <div class="card" data-ng-hide="usuarioVm.autenticando">
+        <div class="card" data-ng-hide="usuarioVm.autenticando">            
             <div class="card-content">
+                <span class="card-title" 
+                      style="padding-bottom: 1rem; border-bottom: solid 1px #CDCDCD"
+                      data-ng-bind="usuarioVm.cadastro.Nome || 'Novo Registro'">
+                </span>
                 <div class="row">
-                    <div class="input-field col s12">
-                        <label for="usuario.cadastro.nome">Nome</label>
-                        <input id="usuario.cadastro.nome" type="text" data-ng-model="usuarioVm.cadastro.Nome">
-                    </div>
-                    <div class="input-field col s12">
-                        <label for="usuario.cadastro.email">Email</label>
-                        <input id="usuario.cadastro.email" type="text" data-ng-model="usuarioVm.cadastro.Email">
-                    </div>
-                    <div class="input-field col s12 m6">
-                        <label for="usuario.cadastro.dataNascimento">Data de Nascimento</label>
-                        <input id="usuario.cadastro.dataNascimeto" type="text"data-ng-model="usuarioVm.cadastro.DataNascimento">
-                    </div>
-                    <div class="input-field col s12 m6">
-                        <label for="usuario.cadastro.senha">Senha</label>
-                        <input id="usuario.cadastro.senha" type="password" data-ng-model="usuarioVm.cadastro.Senha">
-                    </div>
+                    <ul class="stepper col s3">
+                        <li class="step active" data-ng-click="usuarioVm.moveToStep(1)">
+                            <div class="step-title waves-effect waves-dark">Dados pessoais</div>
+                        </li>
+                        <li class="step" data-ng-click="usuarioVm.moveToStep(2)">
+                            <div class="step-title waves-effect waves-dark">Endereço</div>
+                        </li>
+                        <li class="step" data-last="true" data-ng-click="usuarioVm.moveToStep(3)">
+                            <div class="step-title waves-effect waves-dark">Opcionais</div>
+                        </li>
+                    </ul>
+                    <div class="col s9">
+                        <div class="step-content col s12">
+                            <div class="input-field col s12 m6">
+                                <label for="usuario.cadastro.nome">Nome</label>
+                                <input id="usuario.cadastro.nome" type="text" data-ng-model="usuarioVm.cadastro.Nome" data-ng-model-options="{ debounce: 1000 }">
+                            </div>
+                            <div class="input-field col s12 m6">
+                                <label for="usuario.cadastro.email">Email</label>
+                                <input id="usuario.cadastro.email" type="text" data-ng-model="usuarioVm.cadastro.Email">
+                            </div>
+                            <div class="input-field col s12 m6">
+                                <label for="usuario.cadastro.dataNascimento">Data de Nascimento</label>
+                                <input id="usuario.cadastro.dataNascimeto" type="text" data-ng-model="usuarioVm.cadastro.DataNascimento" ng-mask="date">
+                            </div>
+                            <div class="input-field col s12 m6">
+                                <label for="usuario.cadastro.cpfCnpj">CPF</label>
+                                <input id="usuario.cadastro.cpfCnpj" type="text" data-ng-model="usuarioVm.cadastro.CpfCnpj" ng-mask="cpf">
+                            </div>                            
+                            <div class="input-field col s12 m6">
+                                <label for="usuario.cadastro.senha">Senha</label>
+                                <input id="usuario.cadastro.senha" type="password" data-ng-model="usuarioVm.cadastro.Senha">
+                            </div>
+                            <div class="input-field col s12 m6">
+                                <label for="usuario.cadastro.confirmarSenha">Confirmar Senha</label>
+                                <input id="usuario.cadastro.confirmarSenha" type="password" data-ng-model="usuarioVm.cadastro.ConfirmarSenha">
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            <div class="col s12 m6">
+                                <div class="input-field col s12">
+                                    <label for="usuario.cadastro.cep">CEP</label>
+                                    <input id="usuario.cadastro.cep" type="text" data-ng-model="usuarioVm.cadastro.Endereco.CEP" ng-mask="cep">
+                                </div>
+                                <div class="input-field col s12">
+                                    <label for="usuario.cadastro.logradouro">Logradouro</label>
+                                    <input id="usuario.cadastro.logradouro" type="text" data-ng-model="usuarioVm.cadastro.Endereco.Logradouro">
+                                </div>
+                                <div class="input-field col s12">
+                                    <label for="usuario.cadastro.bairro">Bairro</label>
+                                    <input id="usuario.cadastro.bairro" type="text" data-ng-model="usuarioVm.cadastro.Endereco.Bairro">
+                                </div>
+                                <div class="input-field col s12">
+                                    <label for="usuario.cadastro.numero">Número</label>
+                                    <input id="usuario.cadastro.numero" type="number" data-ng-model="usuarioVm.cadastro.Endereco.Numero">
+                                </div>
+                            </div>
+                            <div class="col s12 m6">
+                                <div class="input-field col s12">
+                                    <label for="usuario.cadastro.complemento">Complemento</label>
+                                    <input id="usuario.cadastro.complemento" type="number" data-ng-model="usuarioVm.cadastro.Endereco.Complemento">
+                                </div>
+                                <div class="input-field col s12">
+                                    <label class="active" for="usuario.cadastro.tipoMoradia">Moradia</label>
+                                    <select id="usuario.cadastro.tipoMoradia">
+                                        <option value="" disabled selected>Selecione uma opção</option>
+                                        <option value="CASA">Casa</option>
+                                        <option value="APARTAMENTO">Apartamento</option>
+                                    </select>
+                                </div>
+                                <div class="input-field col s12">
+                                    <label class="active" for="usuario.cadastro.estado">Estado</label>
+                                    <select id="usuario.cadastro.estado">
+                                        <option value="" disabled selected>Selecione um estado</option>
+                                    </select>
+                                </div>
+                                <div class="input-field col s12">
+                                    <label class="active" for="usuario.cadastro.cidade">Cidade</label>
+                                    <select id="usuario.cadastro.cidade" data-ng-disabled="!usuarioVm.cadastro.Endereco.Cidade.Estado.Id">
+                                        <option value="" disabled selected>Selecione uma cidade</option>
+                                    </select>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>                    
                 </div>
             </div>
             <div class="card-action right-align">
