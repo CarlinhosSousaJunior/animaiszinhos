@@ -62,7 +62,7 @@
                     <div class="carousel">
                         <a class="carousel-item" 
                            href="#animal-foto-{{$index}}"
-                           data-ng-repeat="foto in adocaoVm.doacao.Animal.Fotos">
+                           data-ng-repeat="foto in adocaoVm.doacao.Animal.Fotos | beginAt: 1">
                             <img style="height: 250px; width: 250px" src="{{foto}}">
                         </a>
                     </div>

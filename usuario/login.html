@@ -5,7 +5,7 @@
         box-shadow: 1px 1px 2px #222
     }
 </style>
-<div class="row" data-ng-init="usuarioVm.autenticando = false">
+<div class="row">
     <div class="col offset-s1 s10">
         <!-- Autenticacao -->
         <div class="card" data-ng-show="usuarioVm.autenticando">
@@ -113,9 +113,10 @@
                                 <div class="input-field col s12">
                                     <label class="active" for="usuario.cadastro.tipoMoradia">Moradia</label>
                                     <select id="usuario.cadastro.tipoMoradia">
-                                        <option value="" disabled selected>Selecione uma opção</option>
+                                        <option value="" disabled selected>Selecione uma opção</option>                                        
                                         <option value="CASA">Casa</option>
                                         <option value="APARTAMENTO">Apartamento</option>
+                                        <option value="MAIORES">Chácaras ou Sítios</option>
                                     </select>
                                 </div>
                                 <div class="input-field col s12">

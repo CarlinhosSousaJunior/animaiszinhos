@@ -5,6 +5,8 @@ angular
 function UsuarioController(UsuarioResource, $location, $sessionStorage) {
     usuarioVm = this;
 
+    usuarioVm.autenticando = true; // controle de telas login / cadastro
+
     usuarioVm.cadastrar = cadastrar;
     usuarioVm.autenticar = autenticar;
     usuarioVm.moveToStep = moveToStep;
