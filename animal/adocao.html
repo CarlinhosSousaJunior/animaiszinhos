@@ -54,7 +54,13 @@
                         <span class="right">
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             Selecionar Candidato
-                        </span>                        
+                        </span>
+                    </a>
+                    <a data-ng-show="adocaoVm.Usuario.Id === adocaoVm.doacao.Usuario.Id"
+                       class="btn waves-effect waves-light red accent-4 modal-trigger"
+                       data-ng-click="adocaoVm.cancelarDoacao(adocaoVm.doacao)"
+                       style="margin-top: 0.5em">
+                         Cancelar Doação
                     </a>
                 </div>
                 <div class="col s6">

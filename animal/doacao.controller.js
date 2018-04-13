@@ -30,7 +30,8 @@ function DoacaoController($scope, RestService, $sessionStorage, $http, $location
             .then(response => {
                 console.log(response, $scope.formdata);
                 if($scope.formdata) {
-                    $scope.formdata.append("Entidade", response.Animal.Id);
+                    $scope.formdata.append("EntidadeId", response.Animal.Id);
+                    $scope.formdata.append("EntidadeNome", "Animal");
                     salvarImagens($scope.formdata).then(() => {
                         Materialize.toast("Doação realizada com sucesso.", 3500);
                         $location.path("/animais");

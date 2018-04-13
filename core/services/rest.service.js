@@ -45,7 +45,7 @@
         }
 
         function salvar(rota, entidade) {
-            if (!entidade.Id || !entidade.id)
+            if (!entidade.Id && !entidade.id)
                 return _adicionar(rota, entidade);
             return _editar(entidade);
         }

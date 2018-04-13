@@ -2,7 +2,7 @@ angular
     .module("Module")
     .controller("AdocaoController", AdocaoController);
 
-function AdocaoController(RestService, $routeParams, $sessionStorage, $scope) {
+function AdocaoController(RestService, $routeParams, $sessionStorage, $location) {
     let adocaoVm = this;
     
     adocaoVm.enviarSolicitacao = enviarSolicitacao;
@@ -11,6 +11,7 @@ function AdocaoController(RestService, $routeParams, $sessionStorage, $scope) {
     adocaoVm.abrirModalSolicitacoes = abrirModalSolicitacoes;
     adocaoVm.Usuario = $sessionStorage.Usuario;
     adocaoVm.selecionarCandidato = selecionarCandidato;
+    adocaoVm.cancelarDoacao = cancelarDoacao;
 
     obterDoacao($routeParams.id);
     obterComentarios($routeParams.id);
@@ -80,6 +81,16 @@ function AdocaoController(RestService, $routeParams, $sessionStorage, $scope) {
             .salvar("solicitacoes-adocao", solicitacao)
             .then(response => {
                 Materialize.toast("Candidato selecionado com sucesso", 4000);
+            });
+    }
+
+    function cancelarDoacao(doacao) {
+        doacao.Status = "CANCELADO";
+        RestService
+            .salvar("doacoes", doacao)
+            .then(response => {
+                Materialize.toast("Doação cancelada com sucesso", 4000);
+                $location.path('animais');
             });
     }
 }
