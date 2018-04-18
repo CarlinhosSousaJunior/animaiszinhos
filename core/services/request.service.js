@@ -12,7 +12,7 @@
         this.removerRequisicao = removerRequisicao;
         this.zerarRequisicoes = zerarRequisicoes;
 
-        var requisicoesAtivas = 0;
+        let requisicoesAtivas = 0;
 
         function requisicoesPendentes() {
             return requisicoesAtivas;
@@ -23,7 +23,7 @@
         }
 
         function adicionarRequisicoes(n) {
-            requisicoesAtivas += n || 1;
+            requisicoesAtivas += n | 1;
         }
 
         function removerRequisicao() {
@@ -31,7 +31,7 @@
         }
 
         function removerRequisicoes(n) {
-            requisicoesAtivas -= n || 1;
+            requisicoesAtivas -= n | 1;
             if (requisicoesAtivas < 0)
                 zerarRequisicoes();
         }

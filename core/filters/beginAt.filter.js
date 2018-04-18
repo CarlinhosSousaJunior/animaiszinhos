@@ -3,7 +3,9 @@
         .module("Module")
         .filter("beginAt", function () {
             return function (array, begin) {
-                return array.slice(begin);
+                if(array.length > begin)
+                    return array.slice(begin);
+                return array;
             };
         });
 })();

@@ -25,6 +25,9 @@
 </head>
 
 <body data-ng-app="Module" data-ng-controller="MainController as mainVm" style="background-color: #FAFAFA; min-height: 100%; max-width: 100%">
+    <div data-ng-show="mainVm.RLService.requisicoesPendentes()">
+        <!-- LOADING VAI EM ALGUM LUGAR POR AQUI -->
+    </div>
     <nav class="green">
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">Animaiszinhos</a>
