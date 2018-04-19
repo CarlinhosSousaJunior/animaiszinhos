@@ -25,7 +25,8 @@
 </head>
 
 <body data-ng-app="Module" data-ng-controller="MainController as mainVm" style="background-color: #FAFAFA; min-height: 100%; max-width: 100%">
-    <div data-ng-show="mainVm.RLService.requisicoesPendentes()">
+    <div data-ng-show="mainVm.RLService.requisicoesPendentes()" style="position: absolute; float: left; 
+    top: 0; left: 0; width: 100%; height: 100%; background-color: #74B9FF; opacity: 0.2; z-index: 999">
         <!-- LOADING VAI EM ALGUM LUGAR POR AQUI -->
     </div>
     <nav class="green">

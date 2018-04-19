@@ -19,7 +19,7 @@
         });
 
         this.obterRestangular().addResponseInterceptor(function (data, operation, what, url, response, deferred) {
-            RequestsListenerService.removerRequisicao();
+            setTimeout(RequestsListenerService.removerRequisicao(), 500);
             return data;
         });
 

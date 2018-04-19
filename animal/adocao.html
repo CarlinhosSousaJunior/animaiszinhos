@@ -23,8 +23,8 @@
                         <a href="#!/doacao/{{adocaoVm.doacao.Id}}" id="btn-editar" class="btn-floating waves-effect waves-light blue" style="display:none">
                             <i class="material-icons">edit</i>
                         </a>
-                        <h4 style="display: inline-block">{{adocaoVm.doacao.Animal.Nome}}</h4>                        
-                    </div>                    
+                        <h4 style="display: inline-block">{{adocaoVm.doacao.Animal.Nome}}</h4>
+                    </div>
                     <p>{{adocaoVm.doacao.Animal.Descricao}}</p>
                     <ul>
                         <li>
@@ -40,22 +40,31 @@
                             <b>Espécie:</b> {{adocaoVm.doacao.Animal.Especie}}
                         </li>                        
                     </ul>
-                    <a  data-ng-hide="adocaoVm.Usuario.Id === adocaoVm.doacao.Usuario.Id"
+                    <!-- BOTÃO PARA SOLICITAR ADOÇÃO -->
+                    <a  data-ng-hide="adocaoVm.Usuario.Id === adocaoVm.doacao.Usuario.Id || adocaoVm.solicitacaoPendente != null"
                         class="btn waves-effect waves-light green accent-4 pulse modal-trigger" 
                         onclick="$('#modal1').modal('open');">
                         Quero adotar !
+                    </a>                    
+                    <!-- BOTÃO PARA CANCELAR A SOLICITAÇÃO PENDENTE -->
+                    <a  data-ng-show="adocaoVm.solicitacaoPendente != null"
+                        class="btn waves-effect waves-light red accent-4"
+                        data-ng-click="adocaoVm.cancelarSolicitacao(adocaoVm.solicitacaoPendente)">
+                        Cancelar Solicitação
                     </a>
+                    <!-- BOTÃO PARA SELECIONAR CANDIDADO A ADOTAR -->
                     <a  data-ng-show="adocaoVm.Usuario.Id === adocaoVm.doacao.Usuario.Id"
                         class="btn waves-effect waves-light orange accent-4 modal-trigger"
                         data-ng-click="adocaoVm.abrirModalSolicitacoes(adocaoVm.doacao.Id)">
                         <span class="left">
                             <i class="material-icons">playlist_add_check</i>
-                        </span>                        
+                        </span>
                         <span class="right">
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             Selecionar Candidato
                         </span>
                     </a>
+                    <!-- BOTÃO PARA CANCELAR A DOAÇÃO -->
                     <a data-ng-show="adocaoVm.Usuario.Id === adocaoVm.doacao.Usuario.Id"
                        class="btn waves-effect waves-light red accent-4 modal-trigger"
                        data-ng-click="adocaoVm.cancelarDoacao(adocaoVm.doacao)"

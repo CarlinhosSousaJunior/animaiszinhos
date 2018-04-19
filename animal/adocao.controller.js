@@ -12,9 +12,11 @@ function AdocaoController(RestService, $routeParams, $sessionStorage, $location)
     adocaoVm.Usuario = $sessionStorage.Usuario;
     adocaoVm.selecionarCandidato = selecionarCandidato;
     adocaoVm.cancelarDoacao = cancelarDoacao;
+    adocaoVm.cancelarSolicitacao = cancelarSolicitacao;
 
     obterDoacao($routeParams.id);
-    obterComentarios($routeParams.id);
+    obterComentarios($routeParams.id);    
+    obterSolicitacaoPendenteUsuario($routeParams.id, adocaoVm.Usuario.Id);
 
     $(document).ready($('.modal').modal());
 
@@ -37,6 +39,7 @@ function AdocaoController(RestService, $routeParams, $sessionStorage, $location)
         RestService
             .salvar("solicitacoes-adocao", solicitacao)
             .then(response => {
+                adocaoVm.solicitacaoPendente = response;
                 adocaoVm.motivo = "";
                 Materialize.toast("Solicitação enviada com sucesso!", 3500);
                 $('#modal1').modal('close');
@@ -63,6 +66,19 @@ function AdocaoController(RestService, $routeParams, $sessionStorage, $location)
             .then(response => {
                 adocaoVm.comentarios = response;
             });
+    }
+
+    function obterSolicitacaoPendenteUsuario(doacao, usuario) {
+        RestService
+            .buscar("solicitacoes-adocao", {doacao: doacao, usuario: usuario, status: "PENDENTE"})
+            .then(response => adocaoVm.solicitacaoPendente = (response.length) ? response[0] : null);
+    }
+
+    function cancelarSolicitacao(solicitacao) {
+        solicitacao.Status = "CANCELADO";
+        RestService
+            .salvar("solicitacoes-adocao", solicitacao)
+            .then(response => adocaoVm.solicitacaoPendente = null );
     }
 
     function abrirModalSolicitacoes(doacao) {
