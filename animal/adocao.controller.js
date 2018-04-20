@@ -5,11 +5,11 @@ angular
 function AdocaoController(RestService, $routeParams, $sessionStorage, $location) {
     let adocaoVm = this;
     
+    adocaoVm.Usuario = $sessionStorage.Usuario;
     adocaoVm.enviarSolicitacao = enviarSolicitacao;
     adocaoVm.enviarComentario = enviarComentario;
     adocaoVm.obterComentarios = obterComentarios;    
-    adocaoVm.abrirModalSolicitacoes = abrirModalSolicitacoes;
-    adocaoVm.Usuario = $sessionStorage.Usuario;
+    adocaoVm.abrirModalSolicitacoes = abrirModalSolicitacoes;    
     adocaoVm.selecionarCandidato = selecionarCandidato;
     adocaoVm.cancelarDoacao = cancelarDoacao;
     adocaoVm.cancelarSolicitacao = cancelarSolicitacao;
@@ -84,7 +84,7 @@ function AdocaoController(RestService, $routeParams, $sessionStorage, $location)
     function abrirModalSolicitacoes(doacao) {
         adocaoVm.solicitacoes = [];
         RestService
-            .buscar("doacoes/"+doacao+"/solicitacoes-adocao")
+            .buscar("solicitacoes-adocao", { doacao: doacao , status: "PENDENTE"})
             .then(response => {
                 adocaoVm.solicitacoes = response;
                 $('#modal-solicitacoes').modal('open');
@@ -92,10 +92,11 @@ function AdocaoController(RestService, $routeParams, $sessionStorage, $location)
     }
 
     function selecionarCandidato(solicitacao) {
-        solicitacao.Status = "ACEITO";
+        solicitacao.Status = "SELECIONADO";
         RestService
             .salvar("solicitacoes-adocao", solicitacao)
             .then(response => {
+                $location.path('animais');
                 Materialize.toast("Candidato selecionado com sucesso", 4000);
             });
     }

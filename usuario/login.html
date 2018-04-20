@@ -61,9 +61,17 @@
                     </ul>
                     <div class="col s9">
                         <div class="step-content col s12">
-                            <div class="input-field col s12 m6">
+                            <div class="input-field col s12">
                                 <label for="usuario.cadastro.nome">Nome</label>
                                 <input id="usuario.cadastro.nome" type="text" data-ng-model="usuarioVm.cadastro.Nome" data-ng-model-options="{ debounce: 1000 }">
+                            </div>
+                            <div class="input-field col s12 m6">
+                                <label class="active" for="usuario.cadastro.tipo">Tipo</label>
+                                <select id="usuario.cadastro.tipo" data-ng-model="usuarioVm.cadastro.Tipo">
+                                    <option value="" disabled selected>Selecione uma opção</option>
+                                    <option value="COLABORADOR">Colaborador</option>
+                                    <option value="ORGANIZAÇÃO">Organização</option>                                    
+                                </select>
                             </div>
                             <div class="input-field col s12 m6">
                                 <label for="usuario.cadastro.email">Email</label>
@@ -72,7 +80,7 @@
                             <div class="input-field col s12 m6">
                                 <label for="usuario.cadastro.dataNascimento">Data de Nascimento</label>
                                 <input id="usuario.cadastro.dataNascimeto" type="text" data-ng-model="usuarioVm.cadastro.DataNascimento" ng-mask="date">
-                            </div>
+                            </div>                            
                             <div class="input-field col s12 m6">
                                 <label for="usuario.cadastro.cpfCnpj">CPF</label>
                                 <input id="usuario.cadastro.cpfCnpj" type="text" data-ng-model="usuarioVm.cadastro.CpfCnpj" ng-mask="cpf">
@@ -84,7 +92,7 @@
                             <div class="input-field col s12 m6">
                                 <label for="usuario.cadastro.confirmarSenha">Confirmar Senha</label>
                                 <input id="usuario.cadastro.confirmarSenha" type="password" data-ng-model="usuarioVm.cadastro.ConfirmarSenha">
-                            </div>
+                            </div>                            
                         </div>
                         <div class="step-content">
                             <div class="col s12 m6">

@@ -10,47 +10,50 @@
                 <span class="card-title">Cadastro de Campanha</span>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="campanha.titulo" type="text" class="validate">
+                        <input id="campanha.titulo" type="text" class="validate" data-ng-model="campanhaVm.campanha.Titulo">
                         <label for="campanha.titulo">Título</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <select id="tipo.campanha">
+                        <select id="tipo.campanha" data-ng-model="campanhaVm.campanha.Tipo">
                             <option value="ARRECADACAO" selected>Arrecadação</option>
                             <option value="PROMOCAO">Promoção</option>
                         </select>
                         <label for="tipo.campanha">Tipo</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="meta.arrecadacao" type="number">
+                        <input id="meta.arrecadacao" type="text" ng-mask="money" data-ng-model="campanhaVm.campanha.Meta">
                         <label for="meta.arrecadacao">Meta R$</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="inicio.campanha" type="text">
+                        <input id="inicio.campanha" type="text" ng-mask="date" data-ng-model="campanhaVm.campanha.DataInicio">
                         <label for="inicio.campanha">Data de Início</label>
                     </div>
                     <div class="input-field col s1 right-align">
-                        <input type="checkbox" class="filled-in" id="habilitar.termino" checked="" />
+                        <input  data-ng-model="campanhaVm.campanha.possuiTermino"
+                                type="checkbox" class="filled-in" id="habilitar.termino" checked=""/>
                         <label for="habilitar.termino"></label>
                     </div>
                     <div class="input-field col s5">
-                        <input id="termino.campanha" type="text">
+                        <input  data-ng-disabled="!campanhaVm.campanha.possuiTermino"
+                                data-ng-model="campanhaVm.campanha.DataTermino"
+                                ng-mask="date" id="termino.campanha" type="text">
                         <label for="termino.campanha">Data de Termino</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <textarea id="descricao.campanha" class="materialize-textarea"></textarea>
+                        <textarea id="descricao.campanha" class="materialize-textarea" data-ng-model="campanhaVm.campanha.Descricao"></textarea>
                         <label for="descricao.campanha">Descrição</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="file-field input-field">
                         <div class="btn blue">
-                            <span>Imagem</span>
+                            <span>Imagens</span>
                             <input type="file" multiple>
                         </div>
                         <div class="file-path-wrapper">
@@ -61,7 +64,7 @@
             </div>
             <div class="card-action right-align">
                 <a class="btn red" href="#!/minhas-campanhas">Cancelar</a>
-                <a class="btn green" href="#">Salvar</a>
+                <a class="btn green waves-effect waves-light" data-ng-click="campanhaVm.salvarCampanha(campanhaVm.campanha)">Salvar</a>
             </div>
         </div>
     </div>

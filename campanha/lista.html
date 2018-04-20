@@ -18,6 +18,23 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr data-ng-repeat="campanha in campListaVm.campanhas">
+                            <td>{{campanha.Titulo}}</td>
+                            <td>
+                                <button class="btn" data-ng-class="campListaVm.StatusColorConfig">{{campanha.Status}}</button>
+                            </td>
+                            <td>
+                                <div class="progress">
+                                    <div    class="determinate green tooltipped" 
+                                            style="width: {{campanha.Andamento + '%'}}" 
+                                            data-position="top" data-delay="50" 
+                                            data-tooltip="{{campanha.Andamento + '%'}}"></div>
+                                </div>
+                            </td>
+                            <td>
+                                {{campanha.DataTermino}}
+                            </td>
+                        </tr>
                         <tr>
                             <td>
                                 Rodinha do Tobias
