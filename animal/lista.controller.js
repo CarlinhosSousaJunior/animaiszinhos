@@ -10,9 +10,6 @@ function AnimaisController(RestService, $scope, $http, $location, $sessionStorag
     RestService
         .buscar('doacoes', { status: 'EM_ANDAMENTO' })
         .then(response => $scope.doacoes = response);
-    /*$http
-        .get("http://localhost:49664/api/doacoes", {status: "EM_ANDAMENTO"})
-        .then(response => $scope.doacoes = response.data);*/
 
     $scope.selecionarAnimalAleatorio = (doacoes) => {
         let indice = Math.floor(Math.random() * doacoes.length);

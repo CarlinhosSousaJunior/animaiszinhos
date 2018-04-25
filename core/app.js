@@ -12,9 +12,9 @@ angular
             controllerAs: "campListaVm"
         })
         .when("/campanha/:id", {            
-            templateUrl: "campanha/cadastro.html",
-            controller: "CampanhaController",
-            controllerAs: "campanhaVm"
+            templateUrl: "campanha/info.html",
+            controller: "CampanhaInfoController",
+            controllerAs: "campInfoVm"
         })
         .when("/campanha", {
             templateUrl: "campanha/cadastro.html",

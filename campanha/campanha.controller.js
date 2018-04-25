@@ -2,18 +2,34 @@ angular
     .module("Module")
     .controller("CampanhaController", CampanhaController);
 
-function CampanhaController(RestService, $routeParams) {
+function CampanhaController(RestService, $routeParams, $sessionStorage, $http) {
     let campanhaVm = this;
     campanhaVm.campanha = {
         Titulo: "Campanha Teste",
-        Meta: "1.500,00",
+        Meta: "150000",
         Descricao: "Campanha descricao",
-        DataInicio: "2018/04/20",
+        DataInicio: "20/04/2018",
         Tipo: "ARRECADACAO"
     }
     campanhaVm.salvarCampanha = salvarCampanha;
+    campanhaVm.carregarThumbs = carregarThumbs;
 
     obterCampanha($routeParams.id);
+
+    function carregarThumbs(imagens) {
+        campanhaVm.formdata = new FormData();        
+        for(imagem of imagens)
+            campanhaVm.formdata.append("file", imagem);
+    }
+
+    function salvarImagens(formdata) {
+        return $http({
+            method: 'post',
+            url: SERVER_BASE_URL.concat("fotos"),
+            data: formdata,
+            headers: { 'Content-Type': undefined, 'Authorization': $sessionStorage.access_token }
+        });
+    }
 
     function converterData(data) {
         if(!data) return null;
@@ -21,14 +37,26 @@ function CampanhaController(RestService, $routeParams) {
         return splited[2] + "-" + splited[1] + "-" + splited[0];
     }
 
-    function salvarCampanha(campanha) {    
+    function salvarCampanha(campanha) {
         campanha.DataInicio = converterData(campanha.DataInicio);
         campanha.DataTermino = converterData(campanha.DataTermino);
-        campanha.Meta = campanha.Meta.replace(/./g).split(",")[0];
+        campanha.Meta = campanha.Meta.split(",").join("").split(".")[0];
+        campanha.Usuario = $sessionStorage.Usuario;
         RestService
             .salvar("campanhas", campanha)
             .then(response => {
-                Materialize.toast("Campanha salva com sucesso.", 4500);
+                console.log(campanhaVm.formdata);
+                if(campanhaVm.formdata) {
+                    campanhaVm.formdata.append("EntidadeId", response.Id);
+                    campanhaVm.formdata.append("EntidadeNome", "Campanha");
+                    salvarImagens(campanhaVm.formdata).then(() => {
+                        Materialize.toast("Campanha salva com sucesso.", 4500);
+                        $location.path("/campanhas");
+                    });
+                } else {
+                    Materialize.toast("Campanha salva com sucesso.", 4500);
+                    $location.path("/campanhas");
+                }
             });
     }
 
@@ -39,5 +67,5 @@ function CampanhaController(RestService, $routeParams) {
             .then(response => {
                 campanhaVm.campanha = response;
             });
-    }
+    }    
 }

@@ -4,7 +4,7 @@
         .directive("ngMask", [function () {
             return {
                 restrict: "A",
-                link: function (scope, element, attribute) {
+                link: function (scope, element, attribute) {                    
                     switch (attribute.ngMask) {
                         case "date":
                             $(element).mask("00/00/0000");
@@ -20,6 +20,15 @@
                             break;
                         case "cpf":
                             $(element).mask("000.000.000-00");
+                            break;
+                        case "cnpj":
+                            $(element).mask("00.000.000/0000-00")
+                            break;
+                        case "cnpfcnpj":
+                            if($(element).val().length > 11)
+                                $(element).mask("00.000.000/0000-00")
+                            else
+                                $(element).mask("000.000.000-00");
                             break;
                     }
                 }

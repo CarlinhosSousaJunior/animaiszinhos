@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col s9 offset-s2">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{campInfoVm.campanha.Titulo}}</span>
+                <div class="row">
+                    <div>
+                        <div class="col s3">
+                            <div class="">Descrição:</div>
+                            <div>{{campInfoVm.campanha.Descricao}}</div>
+                        </div>
+                        <div class="col s9">
+                            <div class="">Início:</div>
+                            <div>{{campInfoVm.campanha.DataInicio | date:'dd/MM/yyyy'}}</div>
+                        </div>
+                        <div class="col s3">
+                            <div class="">Meta:</div>
+                            <div>{{campInfoVm.campanha.Meta | currency: 'R$'}}</div>
+                        </div>
+                        <div class="col s9">
+                            <div class="">Tipo:</div>
+                            <div>{{campInfoVm.campanha.Tipo}}</div>
+                        </div>
+                    </div>
+                    <div class="col s12" style="margin-top: 1rem">
+                        <div data-ng-repeat="foto in campInfoVm.campanha.Fotos" class="col s4">
+                            <img src="http://localhost:49664/api/fotos/{{foto}}" alt="" style="height: 10rem">
+                        </div>                        
+                    </div>
+                </div>                
+            </div>
+            <div class="card-action right-align" data-ng-if="campInfoVm.Usuario.Id == campInfoVm.campanha.Usuario.Id">
+                <a href="" data-ng-show="campInfoVm.campanha.Status != 'FINALIZAR'">FINALIZAR</a>
+                <a href="" data-ng-show="campInfoVm.campanha.Status == 'EM_ANDAMENTO'">CANCELAR</a>
+                <a href="" data-ng-show="campInfoVm.campanha.Status == 'EM_ANDAMENTO'">PAUSAR</a>
+                <a href="" data-ng-show="campInfoVm.campanha.Status == 'PAUSAR'">CONTINUAR</a>
+            </div>
+            <div class="card-action right-align" data-ng-if="campInfoVm.Usuario.Id != campInfoVm.campanha.Usuario.Id">
+                <a href="" data-ng-show="campInfoVm.campanha.Tipo == 'ARRECADACAO'">COLABORAR</a>
+            </div>
+        </div>
+    </div>
+</div>

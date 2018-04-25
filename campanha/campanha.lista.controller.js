@@ -2,8 +2,10 @@ angular
     .module("Module")
     .controller("CampanhaListaController", CampanhaListaController);
 
-function CampanhaListaController(RestService) {
+function CampanhaListaController(RestService, $sessionStorage) {
     let campListaVm = this;
+
+    campListaVm.Usuario = $sessionStorage.Usuario;
 
     campListaVm.StatusColorConfig = {
         green: "FINALIZADO",
@@ -16,7 +18,7 @@ function CampanhaListaController(RestService) {
 
     function obterCampanhas() {
         RestService
-            .buscar("campanhas")
+            .buscar("campanhas", {ûsuario: campListaVm.Usuario.Id})
             .then(response => {
                 campListaVm.campanhas = response;
             });

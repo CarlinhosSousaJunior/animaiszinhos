@@ -41,16 +41,7 @@ function DoacaoController($scope, RestService, $sessionStorage, $http, $location
                     $location.path("/animais");
                 }                
             });
-    }
-
-    function salvarImagens(formdata) {
-        return $http({
-            method: 'post',
-            url: SERVER_BASE_URL.concat("fotos"),
-            data: formdata,
-            headers: { 'Content-Type': undefined, 'Authorization': $sessionStorage.access_token }
-        });
-    }
+    }    
 
     function obterDoacao(doacao) {
         RestService

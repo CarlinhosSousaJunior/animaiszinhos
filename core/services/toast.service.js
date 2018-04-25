@@ -3,15 +3,23 @@
         .module("Module")
         .service("ToastService", ToastService);
     
-    function ToastService() {
+    function ToastService($location) {
 
-        this.Send = show;
+        const TIME = 4000;
 
-        function show(status, message) {
+        this.Send = _getCustomToast;
+        this.SendAndRedirect = sendAndRedirect;
+
+        function show(message, status) {
             Materialize.toast(message);
         }
 
-        function _getCustomToast(status, message) {
+        function sendAndRedirect(message, path) {
+            Materialize.toast(message, TIME);
+            $location.path(path);
+        }
+
+        function _getCustomToast(message, status = null) {
             switch (status) {
                 case 200:
                     return _success(message);
