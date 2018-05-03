@@ -30,13 +30,28 @@
                 </div>                
             </div>
             <div class="card-action right-align" data-ng-if="campInfoVm.Usuario.Id == campInfoVm.campanha.Usuario.Id">
-                <a href="" data-ng-show="campInfoVm.campanha.Status != 'FINALIZAR'">FINALIZAR</a>
-                <a href="" data-ng-show="campInfoVm.campanha.Status == 'EM_ANDAMENTO'">CANCELAR</a>
-                <a href="" data-ng-show="campInfoVm.campanha.Status == 'EM_ANDAMENTO'">PAUSAR</a>
-                <a href="" data-ng-show="campInfoVm.campanha.Status == 'PAUSAR'">CONTINUAR</a>
+                <a class="waves-effect waves-light btn green" data-ng-show="campInfoVm.campanha.Status != 'FINALIZAR'">                    
+                    <i class="material-icons left">check</i>
+                    FINALIZAR
+                </a>
+                <a class="waves-effect waves-light btn red" data-ng-show="campInfoVm.campanha.Status == 'EM_ANDAMENTO'">
+                    <i class="material-icons left">close</i>
+                    CANCELAR
+                </a>
+                <a class="waves-effect waves-light btn yellow darken-2" data-ng-show="campInfoVm.campanha.Status == 'EM_ANDAMENTO'">
+                    <i class="material-icons left">pause</i>
+                    PAUSAR
+                </a>
+                <a class="waves-effect waves-light btn blue" data-ng-show="campInfoVm.campanha.Status == 'PAUSAR'">
+                    <i class="material-icons left">play_arrow</i>
+                    CONTINUAR
+                </a>
             </div>
             <div class="card-action right-align" data-ng-if="campInfoVm.Usuario.Id != campInfoVm.campanha.Usuario.Id">
-                <a href="" data-ng-show="campInfoVm.campanha.Tipo == 'ARRECADACAO'">COLABORAR</a>
+                <a data-ng-show="campInfoVm.campanha.Tipo == 'ARRECADACAO'">
+                    <i class="material_icons">attach_money</i>
+                    COLABORAR
+                </a>
             </div>
         </div>
     </div>

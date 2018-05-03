@@ -24,11 +24,26 @@ function DoacaoController($scope, RestService, $sessionStorage, $http, $location
             $scope.formdata.append("file", imagem);
     }
 
+    function converterData(data) {
+        if(!data) return null;
+        let splited = data.split("/");
+        return splited[2] + "-" + splited[1] + "-" + splited[0];
+    }
+
+    function salvarImagens(formdata) {
+        return $http({
+            method: 'post',
+            url: SERVER_BASE_URL.concat("fotos"),
+            data: formdata,
+            headers: { 'Content-Type': undefined, 'Authorization': $sessionStorage.access_token }
+        });
+    }
+
     function salvarDoacao(doacao) {
+        doacao.Animal.DataNascimento = converterData(doacao.Animal.DataNascimento);
         RestService
             .salvar("doacoes", doacao)
             .then(response => {
-                console.log(response, $scope.formdata);
                 if($scope.formdata) {
                     $scope.formdata.append("EntidadeId", response.Animal.Id);
                     $scope.formdata.append("EntidadeNome", "Animal");

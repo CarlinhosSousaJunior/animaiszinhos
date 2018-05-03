@@ -19,6 +19,7 @@ function CampanhaInfoController(RestService, $routeParams, $location, $sessionSt
             .buscarUm("campanhas", id)
             .then(response => {
                 campInfoVm.campanha = response;
+                console.log(campInfoVm.Usuario.Id, campInfoVm.campanha.Usuario.Id);
             });
     }
 }
