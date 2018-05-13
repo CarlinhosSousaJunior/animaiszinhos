@@ -4,6 +4,9 @@ angular
 
 function CampanhaListaController(RestService, $sessionStorage) {
     let campListaVm = this;
+    campListaVm.filtro = {
+        Titulo: ""
+    }
 
     campListaVm.Usuario = $sessionStorage.Usuario;
     campListaVm.getCampanhaAndamentoHeight = getCampanhaAndamentoHeight;

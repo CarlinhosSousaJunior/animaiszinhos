@@ -8,6 +8,7 @@ function CampanhaInfoController(RestService, $routeParams, $location, $sessionSt
     campInfoVm.Usuario = $sessionStorage.Usuario;
 
     $(document).ready(() => {
+        $('.modal').modal();
         if($routeParams.id)
             obterCampanha($routeParams.id);
         else
@@ -21,5 +22,14 @@ function CampanhaInfoController(RestService, $routeParams, $location, $sessionSt
                 campInfoVm.campanha = response;
                 console.log(campInfoVm.Usuario.Id, campInfoVm.campanha.Usuario.Id);
             });
+    }
+
+    function alterarCampanha(campanha, status) {
+        campanha.Status = status;
+        RestService
+            .salvar("campanhas", campanhaVm.campanha)
+            .then(response => {
+                //
+             });
     }
 }

@@ -4,13 +4,7 @@ angular
 
 function CampanhaController(RestService, $routeParams, $sessionStorage, $http) {
     let campanhaVm = this;
-    campanhaVm.campanha = {
-        Titulo: "Campanha Teste",
-        Meta: "150000",
-        Descricao: "Campanha descricao",
-        DataInicio: "20/04/2018",
-        Tipo: "ARRECADACAO"
-    }
+    
     campanhaVm.salvarCampanha = salvarCampanha;
     campanhaVm.carregarThumbs = carregarThumbs;
 
@@ -67,5 +61,5 @@ function CampanhaController(RestService, $routeParams, $sessionStorage, $http) {
             .then(response => {
                 campanhaVm.campanha = response;
             });
-    }    
+    }
 }

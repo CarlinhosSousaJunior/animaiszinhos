@@ -9,10 +9,21 @@
         color: cornflowerblue;
     }
 </style>
-<div class="row">
+<div class="row">    
+
     <div class="col" ng-class="{'s6': campListaVm.Usuario.Tipo === 'ORGANIZACAO', 's10 offset-s1': campListaVm.Usuario.Tipo === 'COLABORADOR'}">
-        <div class="col" data-ng-repeat="campanha in campListaVm.campanhas"
-             ng-class="{'s6': campListaVm.Usuario.Tipo === 'ORGANIZACAO', 's4 offset-s1': campListaVm.Usuario.Tipo === 'COLABORADOR'}">
+        <div class="col s12">
+            <div class="card">                
+                <div class="card-content">
+                    <div class="input-field">
+                        <i class="material-icons prefix">search</i>
+                        <label for="campanha.filtro.titulo">Pesquise aqui..</label>
+                        <input id="campanha.filtro.titulo" type="text" data-ng-model="campListaVm.filtro.Titulo">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col" data-ng-repeat="campanha in campListaVm.campanhas | filter:  campListaVm.filtro" ng-class="{'s6': campListaVm.Usuario.Tipo === 'ORGANIZACAO', 's4 offset-s1': campListaVm.Usuario.Tipo === 'COLABORADOR'}">
             <div id="{{campanha.Id}}" class="card row">
                 <div class="card-content col s11">
                     <span class="card-title" style="padding-bottom: 1rem;">
@@ -28,22 +39,23 @@
                         <b>Meta:</b> {{campanha.Meta | currency: "R$"}}
                     </p>
                     <p>
-                        <b>Descrição:</b> <span>{{campanha.Descricao}}</span>
+                        <b>Descrição:</b>
+                        <span>{{campanha.Descricao}}</span>
                     </p>
-                </div>                
+                </div>
                 <div class="col s1 green" style="height: {{campListaVm.getCampanhaAndamentoHeight(campanha.Id, campanha.Andamento)}};">
                     <div style="position: relative; float: right; right: -11px; font-size: 0.8rem">
                         {{campanha.Andamento | limitTo: 2}}%
                     </div>
                 </div>
             </div>
-        </div>        
-    </div>        
+        </div>
+    </div>
     <div class="col s6" data-ng-if="campListaVm.Usuario.Tipo === 'ORGANIZACAO'">
         <div class="card">
             <div class="card-content">
                 <span class="card-title">
-                    Minhas Campanhas                    
+                    Minhas Campanhas
                 </span>
                 <table class="bordered highlight responsive-table">
                     <thead>
@@ -63,10 +75,8 @@
                             </td>
                             <td>
                                 <div class="progress">
-                                    <div    class="determinate green tooltipped" 
-                                            style="width: {{campanha.Andamento + '%'}}" 
-                                            data-position="top" data-delay="50" 
-                                            data-tooltip="{{campanha.Andamento + '%'}}">
+                                    <div class="determinate green tooltipped" style="width: {{campanha.Andamento + '%'}}" data-position="top" data-delay="50"
+                                        data-tooltip="{{campanha.Andamento + '%'}}">
                                     </div>
                                 </div>
                             </td>
