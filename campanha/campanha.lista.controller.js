@@ -10,6 +10,16 @@ function CampanhaListaController(RestService, $sessionStorage) {
 
     campListaVm.Usuario = $sessionStorage.Usuario;
     campListaVm.getCampanhaAndamentoHeight = getCampanhaAndamentoHeight;
+    campListaVm.abrirModal = abrirModal;
+    
+    function abrirModal(campanha) {        
+        campListaVm.campanha = {
+            Id: campanha.Id,
+            Titulo: campanha.Titulo
+        };
+        $("#modal-campanha-extrato").modal();
+        $("#modal-campanha-extrato").modal('open');
+    }
 
     function getCampanhaAndamentoHeight(id, andamento) {
         let elemento = $("#"+id);

@@ -5,15 +5,18 @@
 </script>
 <style>
     .clickable:hover {
-        cursor: pointer;
         color: cornflowerblue;
     }
+
+    .clickable {
+        cursor: pointer;
+    }
 </style>
-<div class="row">    
+<div class="row">
 
     <div class="col" ng-class="{'s6': campListaVm.Usuario.Tipo === 'ORGANIZACAO', 's10 offset-s1': campListaVm.Usuario.Tipo === 'COLABORADOR'}">
         <div class="col s12">
-            <div class="card">                
+            <div class="card">
                 <div class="card-content">
                     <div class="input-field">
                         <i class="material-icons prefix">search</i>
@@ -30,7 +33,6 @@
                         <a href="#!/campanha/{{campanha.Id}}">
                             {{campanha.Titulo}}
                         </a>
-                        <!--<i class="material-icons clickable right">visibility</i>-->
                     </span>
                     <p>
                         <b>Status:</b> {{campanha.Status.replace('_', ' ')}}
@@ -73,7 +75,7 @@
                             <td>
                                 <button class="btn" data-ng-class="campListaVm.StatusColorConfig">{{campanha.Status.replace('_', ' ')}}</button>
                             </td>
-                            <td>
+                            <td class="clickable" data-ng-click="campListaVm.abrirModal(campanha)">
                                 <div class="progress">
                                     <div class="determinate green tooltipped" style="width: {{campanha.Andamento + '%'}}" data-position="top" data-delay="50"
                                         data-tooltip="{{campanha.Andamento + '%'}}">
@@ -90,5 +92,21 @@
                 </a>
             </div>
         </div>
+    </div>
+</div>
+
+<div id="modal-campanha-extrato" class="modal">
+    <div class="modal-content">
+        <h4>Colaborações Monetárias</h4>
+        <h5><b>{{campListaVm.campanha.Titulo}}</b></h5>
+        <table>
+            <tbody>
+                <tr data-ng-repeat="colaboracao in campListaVm.campanha.Colaboracoes">
+                    <td>{{colaboracao.DataCadastro}}</td>
+                    <td>{{((colaboracao.Quantidade * 100) / campListaVm.campanha.Meta) | '0'}}%</td>
+                    <td>{{colaboracao.Quantidade | currency: 'R$'}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
