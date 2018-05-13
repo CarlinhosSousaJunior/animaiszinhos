@@ -14,20 +14,14 @@ function CampanhaListaController(RestService, $sessionStorage) {
     campListaVm.abrirModal = abrirModal;
     campListaVm.obterCampanhas = obterCampanhas;
     
-    campListaVm.StatusColorConfig = {
-        green: "FINALIZADO",
-        red: "CANCELADO",
-        blue: "ANDAMENTO",
-        grey: "PAUSADO"
+    campListaVm.StatusColorConfig = function(status) {
+        return {
+            green: status === "FINALIZADO",
+            red: status === "CANCELADO",
+            blue: status === "EM_ANDAMENTO",
+            grey: status === "PAUSADO"
+        }        
     }
-
-    campListaVm.Status = [
-        {nome: "Em Andamento", valor: "EM_ANDAMENTO"},
-        {nome:"Pausada", valor: "PAUSADO"},
-        {nome:"Finalizado", valor: "FINALIZADO"}
-    ]
-
-    //$(document).ready( setTimeout($("select").material_select(), 1000) );
 
     function abrirModal(campanha) {        
         campListaVm.campanha = {
@@ -49,7 +43,6 @@ function CampanhaListaController(RestService, $sessionStorage) {
 
     function obterCampanhas(status) {
         status = status || campListaVm.filtro.Status;
-        console.log(status, campListaVm.filtro.Status);
         RestService
             .buscar("campanhas", { status: status })
             .then(response => {
