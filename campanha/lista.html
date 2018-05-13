@@ -1,6 +1,7 @@
 <script>
     $(document).ready(function () {
         $('.tooltipped').tooltip({ delay: 50 });
+        $('select').material_select();
     });
 </script>
 <style>
@@ -13,16 +14,21 @@
     }
 </style>
 <div class="row">
-
-    <div class="col" ng-class="{'s6': campListaVm.Usuario.Tipo === 'ORGANIZACAO', 's10 offset-s1': campListaVm.Usuario.Tipo === 'COLABORADOR'}">
-        <div class="col s12">
-            <div class="card">
-                <div class="card-content">
-                    <div class="input-field">
-                        <i class="material-icons prefix">search</i>
-                        <label for="campanha.filtro.titulo">Pesquise aqui..</label>
-                        <input id="campanha.filtro.titulo" type="text" data-ng-model="campListaVm.filtro.Titulo">
-                    </div>
+    <div class="col" ng-class="{'s6': campListaVm.Usuario.Tipo === 'ORGANIZACAO', 's10 offset-s1': campListaVm.Usuario.Tipo === 'COLABORADOR'}">        
+        <div class="card">
+            <div class="row">
+                <div class="input-field col s8">
+                    <i class="material-icons prefix">search</i>
+                    <label for="campanha.filtro.titulo">Pesquise aqui..</label>
+                    <input id="campanha.filtro.titulo" type="text" data-ng-model="campListaVm.filtro.Titulo">
+                </div>
+                <div class="input-field col s4">
+                    <label for="campanha.filtro.status"></label>
+                    <select id="campanha.filtro.status" ng-model="campListaVm.filtro.Status" ng-change="campListaVm.obterCampanhas()">
+                        <option value="EM_ANDAMENTO">Em Andamento</option>
+                        <option value="PAUSADO">Pausada</option>
+                        <option value="FINALIZADO">Finalizada</option>
+                    </select>
                 </div>
             </div>
         </div>

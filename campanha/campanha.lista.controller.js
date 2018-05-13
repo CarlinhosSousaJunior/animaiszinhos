@@ -5,13 +5,30 @@ angular
 function CampanhaListaController(RestService, $sessionStorage) {
     let campListaVm = this;
     campListaVm.filtro = {
-        Titulo: ""
+        Titulo: "",
+        Status: "EM_ANDAMENTO"
     }
 
     campListaVm.Usuario = $sessionStorage.Usuario;
     campListaVm.getCampanhaAndamentoHeight = getCampanhaAndamentoHeight;
     campListaVm.abrirModal = abrirModal;
+    campListaVm.obterCampanhas = obterCampanhas;
     
+    campListaVm.StatusColorConfig = {
+        green: "FINALIZADO",
+        red: "CANCELADO",
+        blue: "ANDAMENTO",
+        grey: "PAUSADO"
+    }
+
+    campListaVm.Status = [
+        {nome: "Em Andamento", valor: "EM_ANDAMENTO"},
+        {nome:"Pausada", valor: "PAUSADO"},
+        {nome:"Finalizado", valor: "FINALIZADO"}
+    ]
+
+    //$(document).ready( setTimeout($("select").material_select(), 1000) );
+
     function abrirModal(campanha) {        
         campListaVm.campanha = {
             Id: campanha.Id,
@@ -25,27 +42,26 @@ function CampanhaListaController(RestService, $sessionStorage) {
         let elemento = $("#"+id);
         let height = elemento.height();
         return (height * (andamento/100)) + 'px';
-    }
+    }    
 
-    campListaVm.StatusColorConfig = {
-        green: "FINALIZADO",
-        red: "CANCELADO",
-        blue: "ANDAMENTO",
-        grey: "PAUSADO"
-    }
+    obterCampanhas('EM_ANDAMENTO');
+    obterMinhasCampanhas(campListaVm.Usuario.Id);
 
-    obterCampanhas();
-
-    function obterCampanhas() {
+    function obterCampanhas(status) {
+        status = status || campListaVm.filtro.Status;
+        console.log(status, campListaVm.filtro.Status);
         RestService
-            .buscar("campanhas", {usuario: campListaVm.Usuario.Id})
-            .then(response => {
-                campListaVm.minhasCampanhas = response;
-            });
-        RestService
-            .buscar("campanhas", {status: 'EM_ANDAMENTO'})
+            .buscar("campanhas", { status: status })
             .then(response => {
                 campListaVm.campanhas = response;//.filter(c => c.Usuario.Id != campListaVm.Usuario.Id);
+            });
+    }
+
+    function obterMinhasCampanhas(usuario) {
+        RestService
+            .buscar("campanhas", {usuario: usuario})
+            .then(response => {
+                campListaVm.minhasCampanhas = response;
             });
     }
 }
