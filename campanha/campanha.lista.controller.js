@@ -24,12 +24,24 @@ function CampanhaListaController(RestService, $sessionStorage) {
     }
 
     function abrirModal(campanha) {        
-        campListaVm.campanha = {
+        campListaVm.campanhaSelecionada = {
             Id: campanha.Id,
-            Titulo: campanha.Titulo
+            Titulo: campanha.Titulo,
+            Andamento: campanha.Contribuicao,
+            Meta: campanha.Meta,
+            Colaboracoes: []
         };
-        $("#modal-campanha-extrato").modal();
-        $("#modal-campanha-extrato").modal('open');
+        RestService
+            .buscar("colaboracoes", { campanha: campanha.Id })
+            .then(res => {
+                campListaVm.campanhaSelecionada.Colaboracoes = res.map(r => ({
+                    Quantidade: r.Quantidade, 
+                    DataCadastro: r.DataCadastro,
+                    Porcao: (r.Quantidade*100) / campanha.Meta
+                }));
+                $("#modal-campanha-extrato-232").modal();
+                $("#modal-campanha-extrato-232").modal('open');
+            })
     }
 
     function getCampanhaAndamentoHeight(id, andamento) {

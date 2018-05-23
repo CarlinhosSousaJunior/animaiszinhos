@@ -101,15 +101,23 @@
     </div>
 </div>
 
-<div id="modal-campanha-extrato" class="modal">
+<div id="modal-campanha-extrato-232" class="modal">
     <div class="modal-content">
         <h4>Colaborações Monetárias</h4>
-        <h5><b>{{campListaVm.campanha.Titulo}}</b></h5>
-        <table>
+        <h5><b>{{campListaVm.campanhaSelecionada.Titulo}}</b></h5>
+        Andamento: {{campListaVm.campanhaSelecionada.Andamento | currency: 'R$'}} / {{campListaVm.campanhaSelecionada.Meta | currency: 'R$'}}
+        <table class="bordered highlight">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Porção</th>
+                    <th>Contribuição</th>
+                </tr>
+            </thead>
             <tbody>
-                <tr data-ng-repeat="colaboracao in campListaVm.campanha.Colaboracoes">
-                    <td>{{colaboracao.DataCadastro}}</td>
-                    <td>{{((colaboracao.Quantidade * 100) / campListaVm.campanha.Meta) | '0'}}%</td>
+                <tr data-ng-repeat="colaboracao in campListaVm.campanhaSelecionada.Colaboracoes">
+                    <td>{{colaboracao.DataCadastro | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{colaboracao.Porcao | number: 2}}%</td>
                     <td>{{colaboracao.Quantidade | currency: 'R$'}}</td>
                 </tr>
             </tbody>

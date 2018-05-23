@@ -37,13 +37,13 @@
             </div>
             <div class="card-action right-align" data-ng-if="campInfoVm.Usuario.Id == campInfoVm.campanha.Usuario.Id">
                 <a  class="waves-effect waves-light btn green" 
-                    data-ng-show="campInfoVm.campanha.Status != 'FINALIZAR'"
+                    data-ng-show="campInfoVm.campanha.Status != 'FINALIZADO'"
                     data-ng-click="campInfoVm.alterarStatus(campInfoVm.campanha, 'FINALIZADO')">
                     <i class="material-icons left">check</i>
                     FINALIZAR
                 </a>
                 <a  class="waves-effect waves-light btn red"
-                    data-ng-show="campInfoVm.campanha.Status == 'EM_ANDAMENTO'"
+                    data-ng-show="campInfoVm.campanha.Status == 'EM_ANDAMENTO' || campInfoVm.campanha.Status == 'PAUSADO'"
                     data-ng-click="campInfoVm.alterarStatus(campInfoVm.campanha, 'CANCELADO')">
                     <i class="material-icons left">close</i>
                     CANCELAR
@@ -55,7 +55,7 @@
                     PAUSAR
                 </a>
                 <a  class="waves-effect waves-light btn blue"
-                    data-ng-show="campInfoVm.campanha.Status == 'PAUSAR'"
+                    data-ng-show="campInfoVm.campanha.Status == 'PAUSADO'"
                     data-ng-click="campInfoVm.alterarStatus(campInfoVm.campanha, 'EM_ANDAMENTO')">
                     <i class="material-icons left">play_arrow</i>
                     CONTINUAR
@@ -87,6 +87,6 @@
         </div>
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn green">Confirmar</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn green" data-ng-click="campInfoVm.colaborar()">Confirmar</a>
     </div>
 </div>

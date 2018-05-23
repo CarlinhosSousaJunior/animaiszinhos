@@ -6,6 +6,8 @@ function CampanhaInfoController(RestService, $routeParams, $location, $sessionSt
     let campInfoVm = this;
 
     campInfoVm.Usuario = $sessionStorage.Usuario;
+    campInfoVm.alterarStatus = alterarStatus;
+    campInfoVm.colaborar = colaborar;
 
     $(document).ready(() => {
         $('.modal').modal();
@@ -20,16 +22,33 @@ function CampanhaInfoController(RestService, $routeParams, $location, $sessionSt
             .buscarUm("campanhas", id)
             .then(response => {
                 campInfoVm.campanha = response;
-                console.log(campInfoVm.Usuario.Id, campInfoVm.campanha.Usuario.Id);
             });
     }
 
-    function alterarCampanha(campanha, status) {
+    function alterarStatus(campanha, status) {
+        let oldStatus = campanha.Status;
         campanha.Status = status;
         RestService
-            .salvar("campanhas", campanhaVm.campanha)
+            .salvar("campanhas", campanha)
             .then(response => {
-                //
+                Materialize.toast("Status da campanha alterada com sucesso.", 4000);
+             }, error => {
+                 campanha.Status = oldStatus;
              });
+    }
+
+    function colaborar() {
+        let colaboracao = {
+            Usuario: campInfoVm.Usuario,
+            Campanha: campInfoVm.campanha,
+            Quantidade: parseFloat(campInfoVm.colaboracao)
+        }
+        RestService
+            .salvar("colaboracoes", colaboracao)
+            .then(res => {
+                campInfoVm.colaboracao = '';
+                Materialize.toast("Colaboração realizada com sucesso", 4000);
+                $('.modal').close();
+            });
     }
 }

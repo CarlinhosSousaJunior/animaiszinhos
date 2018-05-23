@@ -2,7 +2,7 @@ angular
     .module("Module")
     .controller("CampanhaController", CampanhaController);
 
-function CampanhaController(RestService, $routeParams, $sessionStorage, $http) {
+function CampanhaController(RestService, $routeParams, $sessionStorage, $http, $location) {
     let campanhaVm = this;
     
     campanhaVm.salvarCampanha = salvarCampanha;
@@ -39,7 +39,6 @@ function CampanhaController(RestService, $routeParams, $sessionStorage, $http) {
         RestService
             .salvar("campanhas", campanha)
             .then(response => {
-                console.log(campanhaVm.formdata);
                 if(campanhaVm.formdata) {
                     campanhaVm.formdata.append("EntidadeId", response.Id);
                     campanhaVm.formdata.append("EntidadeNome", "Campanha");
