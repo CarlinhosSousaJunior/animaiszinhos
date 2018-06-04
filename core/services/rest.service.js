@@ -24,12 +24,11 @@
         });
 
         this.obterRestangular().addErrorInterceptor(function (response, deferred, responseHandler) {
-            console.log(response);
-            console.log(deferred);
-            console.log(responseHandler);
+
             RequestsListenerService.removerRequisicao();
             if (response.status !== 200) {
-                ToastService.Send((response.status > 0) ? response.status : 500, "");
+                for(mensagem of response.data["mensagensErro"])
+                    ToastService.Send(mensagem);                
                 return false;
             }
             return true;

@@ -4,6 +4,14 @@ angular
 
 function CampanhaController(RestService, $routeParams, $sessionStorage, $http, $location) {
     let campanhaVm = this;
+
+    campanhaVm.campanha = {
+        Titulo: null,
+        Descricao: null,
+        DataInicio: null,
+        DataTermino: null,
+        Meta: undefined
+    }
     
     campanhaVm.salvarCampanha = salvarCampanha;
     campanhaVm.carregarThumbs = carregarThumbs;
@@ -28,13 +36,13 @@ function CampanhaController(RestService, $routeParams, $sessionStorage, $http, $
     function converterData(data) {
         if(!data) return null;
         let splited = data.split("/");
-        return splited[2] + "-" + splited[1] + "-" + splited[0];
+        return (splited.length === 3) ? splited[2] + "-" + splited[1] + "-" + splited[0] : data;
     }
 
     function salvarCampanha(campanha) {
         campanha.DataInicio = converterData(campanha.DataInicio);
         campanha.DataTermino = converterData(campanha.DataTermino);
-        campanha.Meta = campanha.Meta.split(",").join("").split(".")[0];
+        campanha.Meta = (campanha.Meta !== undefined) ? campanha.Meta.split(",").join("").split(".")[0] : campanha.Meta;
         campanha.Usuario = $sessionStorage.Usuario;
         RestService
             .salvar("campanhas", campanha)

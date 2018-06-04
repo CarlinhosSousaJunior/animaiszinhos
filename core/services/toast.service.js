@@ -11,7 +11,7 @@
         this.SendAndRedirect = sendAndRedirect;
 
         function show(message, status) {
-            Materialize.toast(message);
+            Materialize.toast(message, TIME);
         }
 
         function sendAndRedirect(message, path) {
@@ -32,7 +32,7 @@
                 case 500:
                     return _serverError(message);
                 default:
-                    return show(status);
+                    return show(message);
             }
         }
 

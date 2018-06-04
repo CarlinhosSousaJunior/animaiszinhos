@@ -3,72 +3,82 @@
         <div class="card">
             <div class="card-content">
                 <span class="card-title">
-                    <b>{{campInfoVm.campanha.Titulo}}</b>                    
+                    <b>{{campInfoVm.campanha.Titulo}}</b>
                 </span>
                 <div class="row">
-                    <div>
-                        <div class="col s3">
+                    <div class="col s6">
+                        <div class="col s6">
                             <b>Meta:</b>
                             <div>{{campInfoVm.campanha.Meta | currency: 'R$'}}</div>
                         </div>
-                        <div class="col s9">
+                        <div class="col s6">
                             <b>Tipo:</b>
                             <div>{{campInfoVm.campanha.Tipo}}</div>
                         </div>
-                        <div class="col s3">
+                        <div class="col s6">
                             <b>Início:</b>
                             <div>{{campInfoVm.campanha.DataInicio | date:'dd/MM/yyyy'}}</div>
                         </div>
-                        <div class="col s9" data-ng-show="campInfoVm.campanha.DataTermino">
+                        <div class="col s6" data-ng-show="campInfoVm.campanha.DataTermino">
                             <b>Término:</b>
                             <div>{{campInfoVm.campanha.DataTermino | date:'dd/MM/yyyy'}}</div>
-                        </div>                        
+                        </div>
                         <div class="col s12">
                             <b>Descrição:</b>
                             <div>{{campInfoVm.campanha.Descricao}}</div>
                         </div>
                     </div>
-                    <div class="col s12" style="margin-top: 1rem">
-                        <div data-ng-repeat="foto in campInfoVm.campanha.Fotos" class="col s4">
-                            <img src="http://localhost:49664/api/fotos/{{foto}}" alt="" style="height: 10rem">
+                    <div class="col s6">
+                        <div class="carousel" style="max-height: 200px; perspective: 200px">
+                            <a class="carousel-item" href="#one!" data-ng-repeat="foto in campInfoVm.campanha.Fotos">
+                                <img src="http://localhost:49664/api/fotos/{{foto}}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" data-ng-if="campInfoVm.parecer">
+                    <h5 style="border-bottom: 1px solid #CDCDCD">
+                        Parecer
+                    </h5>
+                    <div class="col s6">
+                        <b>Descrição:</b>
+                        <div>{{campInfoVm.parecer.Descricao}}</div>
+                    </div>
+                    <div class="col s6">
+                        <div class="carousel" style="max-height: 200px; perspective: 200px">
+                            <a class="carousel-item" href="#one!" data-ng-repeat="foto in campInfoVm.parecer.Fotos">
+                                <img src="http://localhost:49664/api/fotos/{{foto}}">
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card-action right-align" data-ng-if="campInfoVm.Usuario.Id == campInfoVm.campanha.Usuario.Id">
-                <a  class="waves-effect waves-light btn green" 
-                    data-ng-show="campInfoVm.campanha.Status != 'FINALIZADO'"
-                    data-ng-click="campInfoVm.alterarStatus(campInfoVm.campanha, 'FINALIZADO')">
+                <a class="waves-effect waves-light btn green" data-ng-show="campInfoVm.campanha.Status != 'FINALIZADO'" data-ng-click="campInfoVm.abrirModalParecer()">
                     <i class="material-icons left">check</i>
                     FINALIZAR
                 </a>
-                <a  class="waves-effect waves-light btn red"
-                    data-ng-show="campInfoVm.campanha.Status == 'EM_ANDAMENTO' || campInfoVm.campanha.Status == 'PAUSADO'"
+                <a class="waves-effect waves-light btn red" data-ng-show="campInfoVm.campanha.Status == 'EM_ANDAMENTO' || campInfoVm.campanha.Status == 'PAUSADO'"
                     data-ng-click="campInfoVm.alterarStatus(campInfoVm.campanha, 'CANCELADO')">
                     <i class="material-icons left">close</i>
                     CANCELAR
                 </a>
-                <a  class="waves-effect waves-light btn yellow darken-2" 
-                    data-ng-show="campInfoVm.campanha.Status == 'EM_ANDAMENTO'"
-                    data-ng-click="campInfoVm.alterarStatus(campInfoVm.campanha, 'PAUSADO')">
+                <a class="waves-effect waves-light btn yellow darken-2" data-ng-show="campInfoVm.campanha.Status == 'EM_ANDAMENTO'" data-ng-click="campInfoVm.alterarStatus(campInfoVm.campanha, 'PAUSADO')">
                     <i class="material-icons left">pause</i>
                     PAUSAR
                 </a>
-                <a  class="waves-effect waves-light btn blue"
-                    data-ng-show="campInfoVm.campanha.Status == 'PAUSADO'"
-                    data-ng-click="campInfoVm.alterarStatus(campInfoVm.campanha, 'EM_ANDAMENTO')">
+                <a class="waves-effect waves-light btn blue" data-ng-show="campInfoVm.campanha.Status == 'PAUSADO'" data-ng-click="campInfoVm.alterarStatus(campInfoVm.campanha, 'EM_ANDAMENTO')">
                     <i class="material-icons left">play_arrow</i>
                     CONTINUAR
                 </a>
+                <a class="waves-effect waves-light btn blue" href="#!/campanhas">
+                    VOLTAR
+                </a>
             </div>
             <div class="card-action right-align" data-ng-if="campInfoVm.Usuario.Id != campInfoVm.campanha.Usuario.Id">
-                <button
-                    class="waves-effect waves-light modal-trigger btn blue" 
-                    href="#modal-campanha-colaborar" 
-                    data-ng-show="campInfoVm.campanha.Tipo == 'ARRECADACAO'">
+                <button class="waves-effect waves-light modal-trigger btn blue" href="#modal-campanha-colaborar" data-ng-show="campInfoVm.campanha.Tipo == 'ARRECADACAO'">
                     <span class="left">R$</span>
-                    &nbsp;
-                    COLABORAR
+                    &nbsp; COLABORAR
                 </button>
             </div>
         </div>
@@ -79,8 +89,10 @@
     <div class="modal-content">
         <div>
             <h4>Colaboração Monetária</h4>
-            <h5><b>{{campInfoVm.campanha.Titulo}}</b></h5>
-        </div>                
+            <h5>
+                <b>{{campInfoVm.campanha.Titulo}}</b>
+            </h5>
+        </div>
         <div class="input-field">
             <label for="campanha.colaboracao">Quantidade a ser doada</label>
             <input id="campanha.colaboracao" type="text" ng-mask="money" data-ng-model="campInfoVm.colaboracao">
@@ -88,5 +100,30 @@
     </div>
     <div class="modal-footer">
         <a href="#!" class="modal-action modal-close waves-effect waves-green btn green" data-ng-click="campInfoVm.colaborar()">Confirmar</a>
+    </div>
+</div>
+
+<div id="modal-campanha-parecer" class="modal">
+    <div class="modal-content">
+        <div>
+            <h4>Realizar Parecer</h4>
+        </div>
+        <div class="input-field">
+            <label for="campanha.parecer">Descreva o que foi realizado: </label>
+            <textarea id="campanha.parecer" class="materialize-textarea" data-ng-model="campInfoVm.parecer"></textarea>
+        </div>
+        <div class="file-field input-field">
+            <div class="btn blue">
+                <span>Imagens</span>
+                <input id="doacao.imagens" type="file" ng-files="campInfoVm.carregarThumbs($files)" multiple>
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer right-align">
+        <a class="btn waves-effect waves-light green" data-ng-click="campInfoVm.realizarParecer(campInfoVm.parecer)">Confirmar</a>
+        <a class="btn waves-effect waves-light red modal-close">Cancelar</a>
     </div>
 </div>
