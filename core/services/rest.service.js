@@ -27,8 +27,9 @@
 
             RequestsListenerService.removerRequisicao();
             if (response.status !== 200) {
-                for(mensagem of response.data["mensagensErro"])
-                    ToastService.Send(mensagem);                
+                if(Boolean(response.data) && Boolean(response.data["mensagensErro"]))
+                    for(mensagem of response.data["mensagensErro"])
+                        ToastService.Send(mensagem);                
                 return false;
             }
             return true;

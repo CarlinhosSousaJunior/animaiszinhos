@@ -4,6 +4,14 @@ angular
 
 function UsuarioController(UsuarioResource, $location, $sessionStorage) {
     usuarioVm = this;
+    usuarioVm.cadastro = {
+        Nome: null,
+        DataNascimento: null,
+        Email: null,
+        Tipo: null,
+        Senha: null,
+        CpfCnpj: null
+    }
 
     usuarioVm.autenticando = true; // controle de telas login / cadastro
 
@@ -41,9 +49,8 @@ function UsuarioController(UsuarioResource, $location, $sessionStorage) {
 
     function cadastrar(usuario) {
         UsuarioResource.salvar(usuario).then(function (response) {
-            $sessionStorage.Usuario = response;
             Materialize.toast("Usuário salvo com sucesso", 3500);
-            autenticar(response.Email, response.Senha);
+            autenticar(usuario.Email, usuario.Senha);
         });
     }
 

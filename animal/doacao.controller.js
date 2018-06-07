@@ -4,6 +4,15 @@ angular
 
 function DoacaoController($scope, RestService, $sessionStorage, $http, $location, $routeParams, $timeout) {
 
+    $scope.animal = {
+        Nome: null,
+        Filo: null,
+        Especie: null,
+        Peso: null,
+        Descricao: null,
+        DataNascimento: null       
+    }
+
     $(document).ready(() => {
         if($routeParams.id)
             obterDoacao($routeParams.id);
@@ -13,7 +22,7 @@ function DoacaoController($scope, RestService, $sessionStorage, $http, $location
 
     $scope.salvar = function(animal) {
         salvarDoacao({ 
-            Animal: animal, 
+            Animal: animal,
             Usuario: $sessionStorage.Usuario 
         });
     }

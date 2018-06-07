@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="campanha.titulo" type="text" class="validate" data-ng-model="campanhaVm.campanha.Titulo">
-                        <label for="campanha.titulo">Título</label>
+                        <label for="campanha.titulo">Título *</label>
                     </div>
                 </div>
                 <div class="row">
@@ -24,13 +24,13 @@
                     </div>
                     <div class="input-field col s6">
                         <input id="meta.arrecadacao" type="text" ng-mask="money" data-ng-model="campanhaVm.campanha.Meta">
-                        <label for="meta.arrecadacao">Meta R$</label>
+                        <label for="meta.arrecadacao">Meta R$ *</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
                         <input id="inicio.campanha" type="text" ng-mask="date" data-ng-model="campanhaVm.campanha.DataInicio">
-                        <label for="inicio.campanha">Data de Início</label>
+                        <label for="inicio.campanha">Data de Início *</label>
                     </div>
                     <div class="input-field col s1 right-align">
                         <input  data-ng-model="campanhaVm.campanha.possuiTermino"
@@ -47,7 +47,7 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <textarea id="descricao.campanha" class="materialize-textarea" data-ng-model="campanhaVm.campanha.Descricao"></textarea>
-                        <label for="descricao.campanha">Descrição</label>
+                        <label for="descricao.campanha">Descrição *</label>
                     </div>
                 </div>
                 <div class="row">
